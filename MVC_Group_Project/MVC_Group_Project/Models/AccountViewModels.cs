@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MVC_Group_Project.Models
 {
@@ -53,6 +54,20 @@ namespace MVC_Group_Project.Models
 
     public class RegisterViewModel
     {
+        public int UserID { get; set; }
+
+        [Required]
+        [Display(Name = "FirstName")]
+        public string FirstName { get; set; }
+
+        [Required]
+        [Display(Name = "LastName")]
+        public string LastName { get; set; }
+
+        [Required]
+        [Display(Name = "Address")]
+        public string Address { get; set; }
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
@@ -68,6 +83,11 @@ namespace MVC_Group_Project.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        public int AccessLevelID = 1;
+        [ForeignKey("AccessLevelID")]
+        public AccessLevel al;
+
     }
 
     public class ResetPasswordViewModel

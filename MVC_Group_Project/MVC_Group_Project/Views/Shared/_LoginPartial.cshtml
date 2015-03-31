@@ -1,4 +1,5 @@
-﻿@using Microsoft.AspNet.Identity
+﻿@model IEnumerable<MVC_Group_Project.Models.ApplicationUser>
+@using Microsoft.AspNet.Identity
 @if (Request.IsAuthenticated)
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
@@ -20,3 +21,27 @@ else
         <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
     </ul>
 }
+
+@*<script>
+        $(document).ready(function () {
+            var pull = $("#pull");
+            var down = $("#down");
+            down.hide();
+            pull.mouseleave(function () {
+                down.hide();
+            }).mouseenter(function () {
+                down.show();
+            });
+        });
+    </script>*@
+@*<div id="down">
+        <ul>
+            <li>
+                <a>@Html.ActionLink("Register", "Register", "Account")</a>
+            </li>
+            <li>
+                <a>@Html.ActionLink("LogIn", "LogIn", "Account")</a>
+            </li>
+        </ul>
+    </div>*@
+  

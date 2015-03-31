@@ -60,6 +60,14 @@ namespace MVC_Group_Project.Controllers
                 var user = await UserManager.FindAsync(model.Email, model.Password);
                 if (user != null)
                 {
+                    if (user.AccessLevelID == 1)
+                    {
+                        Session["AccessType"] = "user";
+                    }
+                    else if (user.AccessLevelID == 2)
+                    {
+                        Session["AccessType"] = "admin";
+                    }
                     await SignInAsync(user, model.RememberMe);
                     return RedirectToLocal(returnUrl);
                 }
@@ -90,11 +98,11 @@ namespace MVC_Group_Project.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser() { UserName = model.Email, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName, Address = model.Address, AccessLevelID = model.AccessLevelID };
                 IdentityResult result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInAsync(user, isPersistent: false);
+                    await SignInAsync(user, isPersistent: false);   
 
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link

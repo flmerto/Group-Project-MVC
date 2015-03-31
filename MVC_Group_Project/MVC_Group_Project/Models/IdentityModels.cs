@@ -15,6 +15,14 @@ namespace MVC_Group_Project.Models
             // Add custom user claims here
             return userIdentity;
         }
+
+        public int AccessLevelID { get; set; }
+
+        public string Address { get; set; }
+
+        public string LastName { get; set; }
+
+        public string FirstName { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
@@ -28,5 +36,7 @@ namespace MVC_Group_Project.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<MVC_Group_Project.Models.AccessLevel> AccessLevels { get; set; }
     }
 }
