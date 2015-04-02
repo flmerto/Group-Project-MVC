@@ -1,0 +1,50 @@
+﻿@model IEnumerable<MVC_Group_Project.Models.SubCategory>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @*@Html.DisplayNameFor(model => model.cat.ImagePath)*@
+            @*Category Image*@
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.SubCategoryName)*@
+            SubCategory
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.ImagePath)*@
+            Image
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @*@Html.DisplayFor(modelItem => item.cat.ImagePath)*@
+            @*<img src="../../@Html.DisplayFor(model => item.cat.ImagePath)" style="height:50px; width:50px" />*@
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SubCategoryName)
+        </td>
+        <td>
+            @*@Html.DisplayFor(modelItem => item.ImagePath)*@
+            <img src="../../@Html.DisplayFor(model => item.ImagePath)" style="height:50px; width:50px" />
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.SubCategoryID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.SubCategoryID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.SubCategoryID })
+        </td>
+    </tr>
+}
+
+</table>
