@@ -10,9 +10,10 @@ namespace MVC_Group_Project.Models
     {
         public int SubCategoryID { get; set; }
         public string SubCategoryName { get; set; }
-        public string ImagePath { get; set; }        
+        public string ImagePath { get; set; }
         public int CategoryID { get; set; }
         [ForeignKey("CategoryID")]
-        public Category cat;
+        public Category cat { get; set; }
+
     }
 }

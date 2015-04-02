@@ -54,8 +54,6 @@ namespace MVC_Group_Project.Models
 
     public class RegisterViewModel
     {
-        public int UserID { get; set; }
-
         [Required]
         [Display(Name = "FirstName")]
         public string FirstName { get; set; }
