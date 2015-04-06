@@ -9,6 +9,18 @@
         <li>
             @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })
         </li>
+        <li class="dropdown" style="margin-left:-28px;">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" role="menu">
+                <li> <a href="#">Clients</a></li>
+                <li> <a href="#">Bidding Items</a></li>
+                <li> <a href="#">Category</a>
+                 <li style="padding-left:20px"> @Html.ActionLink("SubCategory","Sub","Sub")</li>  
+                <li> <a href="#">History/Report</a></li>
+            </ul>
+        </li>
         <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
     </ul>
     }
@@ -21,26 +33,3 @@ else
     </ul>
 }
 
-@*<script>
-        $(document).ready(function () {
-            var pull = $("#pull");
-            var down = $("#down");
-            down.hide();
-            pull.mouseleave(function () {
-                down.hide();
-            }).mouseenter(function () {
-                down.show();
-            });
-        });
-    </script>*@
-@*<div id="down">
-        <ul>
-            <li>
-                <a>@Html.ActionLink("Register", "Register", "Account")</a>
-            </li>
-            <li>
-                <a>@Html.ActionLink("LogIn", "LogIn", "Account")</a>
-            </li>
-        </ul>
-    </div>*@
-  
