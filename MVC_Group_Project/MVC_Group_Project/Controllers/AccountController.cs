@@ -98,7 +98,7 @@ namespace MVC_Group_Project.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser() { UserName = model.FirstName + model.LastName, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName, Address = model.Address, AccessLevelID = model.AccessLevelID };
+                var user = new ApplicationUser() { UserName = model.Email, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName, Address = model.Address, AccessLevelID = model.AccessLevelID };
                 IdentityResult result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
