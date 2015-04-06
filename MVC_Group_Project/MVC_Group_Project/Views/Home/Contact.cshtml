@@ -4,14 +4,49 @@
 <h2>@ViewBag.Title.</h2>
 <h3>@ViewBag.Message</h3>
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
+<style type="text/css">
+    html, body, #map-canvas {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+</style>
 
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+<script type="text/javascript"
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAm_RUHStEcl_iTTQDHAjByrJrFxrsWM1c">
+</script>
+<script type="text/javascript">
+    function initialize() {
+        var mapOptions = {
+            center: { lat: 49.896181, lng: -97.142358 },
+            zoom: 20
+        };
+        var map = new google.maps.Map(document.getElementById('map-canvas'),
+            mapOptions);
+      }
+      google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+<style type="text/css">
+    #map-canvas {
+        height: 500px;
+        width: 500px;
+        float: right;
+    }
+</style>
+
+<div style="float:left; ">
+    <address>
+        Bid Me!<br />
+        265 Notre Dame Avenue, Winnipeg<br />
+        Manitoba, R3B 1N9, Canada<br />
+        <abbr title="Phone">Phone:</abbr>
+        (204) 800-7919
+    </address>
+
+    <address>
+        <strong>Support:</strong>   <a href="mailto:Support@example.com">help@robertsoncollege.net</a><br />
+        <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">scott.wachal@robertsoncollege.net</a>
+    </address>
+</div>
+
+<div id="map-canvas"></div>
