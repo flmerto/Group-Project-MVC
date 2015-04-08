@@ -12,7 +12,8 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.CategoryName)
+            @*@Html.DisplayNameFor(model => model.CategoryName)*@
+            Category
         </th>
         <th>
             @*@Html.DisplayNameFor(model => model.ImagePath)*@
@@ -24,7 +25,8 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.ImagePath)
+            @*@Html.DisplayFor(modelItem => item.ImagePath)*@
+            @Html.DisplayFor(modelItem => item.CategoryName)
         </td>
         <td>
             @*@Html.DisplayFor(modelItem => item.CategoryName)*@

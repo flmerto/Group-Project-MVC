@@ -12,18 +12,21 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.ImagePath)
+            @*@Html.DisplayNameFor(model => model.ImagePath)*@
+            Image
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ImagePath)
+            @*@Html.DisplayFor(model => model.ImagePath)*@
+            <img src="../../@Html.DisplayFor(model => model.ImagePath)" style="height:150px; width:150px" />
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.CategoryName)
+        <dt style="padding-top:3px">
+            @*@Html.DisplayNameFor(model => model.CategoryName)*@
+            Category
         </dt>
 
-        <dd>
+        <dd style="padding-top:5px">
             @Html.DisplayFor(model => model.CategoryName)
         </dd>
 

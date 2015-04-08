@@ -71,6 +71,7 @@ namespace MVC_Group_Project.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Category category = db.Categories.Find(id);
+            
             if (category == null)
             {
                 return HttpNotFound();
@@ -95,6 +96,7 @@ namespace MVC_Group_Project.Controllers
                 db.Entry(category).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
+               
             }
             return View(category);
         }

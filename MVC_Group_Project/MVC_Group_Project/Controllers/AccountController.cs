@@ -11,6 +11,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Owin;
 using MVC_Group_Project.Models;
+using System.Data.Entity;
 
 namespace MVC_Group_Project.Controllers
 {
@@ -18,14 +19,17 @@ namespace MVC_Group_Project.Controllers
     public class AccountController : Controller
     {
         private ApplicationUserManager _userManager;
+        private ApplicationRoleManager _roleManager;
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         public AccountController()
         {
         }
 
-        public AccountController(ApplicationUserManager userManager)
+        public AccountController(ApplicationUserManager userManager, ApplicationRoleManager roleManager)
         {
             UserManager = userManager;
+            RoleManager = roleManager;
         }
 
         public ApplicationUserManager UserManager {
@@ -36,6 +40,18 @@ namespace MVC_Group_Project.Controllers
             private set
             {
                 _userManager = value;
+            }
+        }
+
+        public ApplicationRoleManager RoleManager
+        {
+            get
+            {
+                return _roleManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationRoleManager>();
+            }
+            private set
+            {
+                _roleManager = value;
             }
         }
 
@@ -60,11 +76,11 @@ namespace MVC_Group_Project.Controllers
                 var user = await UserManager.FindAsync(model.Email, model.Password);
                 if (user != null)
                 {
-                    if (user.AccessLevelID == 1)
+                    if (user.RoleName == "Member")
                     {
-                        Session["AccessType"] = "user";
+                        Session["AccessType"] = "member";
                     }
-                    else if (user.AccessLevelID == 2)
+                    else if (user.RoleName == "Admin")
                     {
                         Session["AccessType"] = "admin";
                     }
@@ -80,6 +96,51 @@ namespace MVC_Group_Project.Controllers
             // If we got this far, something failed, redisplay form
             return View(model);
         }
+
+
+        // GET: Account/Edit/5
+        //public ActionResult Edit(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+        //    }
+
+        //    ApplicationUser user = db.Users.Find(id);
+        //    EditViewModel editViewUser = new EditViewModel();
+        //    editViewUser.AccessLevelID = user.AccessLevelID;
+        //    editViewUser.Email = user.Email;
+        //    editViewUser.FirstName = user.FirstName;
+        //    editViewUser.LastName = user.LastName;
+        //    editViewUser.Address = user.Address;
+
+        //    if (user == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(editViewUser);
+        //}
+
+        //// POST: Account/Edit/5
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Edit([Bind(Include = "ID, FirstName, LastName, Address, Email, AccessLevelID")] EditViewModel editUser, int? id)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        ApplicationUser user = db.Users.Find(id);
+        //        user.AccessLevelID = editUser.AccessLevelID;
+        //        user.Email = editUser.Email;
+        //        user.FirstName = editUser.FirstName;
+        //        user.LastName = editUser.LastName;
+        //        user.Address = editUser.Address;
+
+        //        db.Entry(user).State = EntityState.Modified;
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
+        //    return View(editUser);
+        //}
 
         //
         // GET: /Account/Register
@@ -98,11 +159,15 @@ namespace MVC_Group_Project.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser() { UserName = model.Email, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName, Address = model.Address, AccessLevelID = model.AccessLevelID };
+                var user = new ApplicationUser() { UserName = model.Email, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName, Address = model.Address}; //, RoleName = model.roleName
                 IdentityResult result = await UserManager.CreateAsync(user, model.Password);
+
                 if (result.Succeeded)
                 {
-                    await SignInAsync(user, isPersistent: false);   
+                    await SignInAsync(user, isPersistent: false);
+
+                    var role = RoleManager.FindByName("Member");
+                    UserManager.AddToRole(user.Id, role.Name);
 
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link

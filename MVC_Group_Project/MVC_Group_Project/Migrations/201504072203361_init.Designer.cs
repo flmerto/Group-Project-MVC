@@ -13,7 +13,7 @@ namespace MVC_Group_Project.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201504021852541_init"; }
+            get { return "201504072203361_init"; }
         }
         
         string IMigrationMetadata.Source

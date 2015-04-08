@@ -52,6 +52,30 @@ namespace MVC_Group_Project.Models
         public bool RememberMe { get; set; }
     }
 
+    public class EditViewModel
+    {
+        [Required]
+        [Display(Name = "FirstName")]
+        public string FirstName { get; set; }
+
+        [Required]
+        [Display(Name = "LastName")]
+        public string LastName { get; set; }
+
+        [Required]
+        [Display(Name = "Address")]
+        public string Address { get; set; }
+
+        [Required]
+        [EmailAddress]
+        [Display(Name = "Email")]
+        public string Email { get; set; }
+
+        //public int AccessLevelID = 1;
+        //[ForeignKey("AccessLevelID")]
+        //public AccessLevel al;
+    }
+
     public class RegisterViewModel
     {
         [Required]
@@ -82,9 +106,12 @@ namespace MVC_Group_Project.Models
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
-        public int AccessLevelID = 1;
-        [ForeignKey("AccessLevelID")]
-        public AccessLevel al;
+        //public int AccessLevelID = 1;
+        //[ForeignKey("AccessLevelID")]
+        //public AccessLevel al;
+
+        //[Required]
+        //public string roleName { get; set; }
 
     }
 

@@ -14,7 +14,7 @@ namespace MVC_Group_Project.Models
         public DateTime ExpiryDate { get; set; }
         public int CSC { get; set; }
 
-        //public int UserID { get; set; }
+        //public string UserID { get; set; }
         //[ForeignKey("UserID")]
         //public 
     }

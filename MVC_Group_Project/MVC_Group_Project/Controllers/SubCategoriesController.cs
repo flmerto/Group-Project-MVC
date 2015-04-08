@@ -76,7 +76,9 @@ namespace MVC_Group_Project.Controllers
             if (subCategory == null)
             {
                 return HttpNotFound();
+            
             }
+            ViewBag.CategoryID = new SelectList(db.SubCategories, "CategoryID", "Category", subCategory.CategoryID);
             return View(subCategory);
         }
 
@@ -98,6 +100,7 @@ namespace MVC_Group_Project.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.CategoryID = new SelectList(db.SubCategories, "CategoryID", "Category", subCategory.CategoryID);
             return View(subCategory);
         }
 
