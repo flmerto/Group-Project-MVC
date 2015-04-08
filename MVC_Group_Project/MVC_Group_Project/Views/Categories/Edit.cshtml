@@ -13,13 +13,12 @@
 
     <div class="panel panel-primary" style="width:500px" >
         <div class=" panel-heading">
-        <h4>Category</h4>
-    </div>
+            <h4>Category</h4>
+        </div>
 
         <div class="panel-body">
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             @Html.HiddenFor(model => model.CategoryID)
-
 
             <div>
                 @Html.LabelFor(model => model.CategoryName, "Category:", htmlAttributes: new { @class = "control-label col-md-2" })

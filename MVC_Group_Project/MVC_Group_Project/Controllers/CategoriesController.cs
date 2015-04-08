@@ -87,14 +87,22 @@ namespace MVC_Group_Project.Controllers
         {
             if (ModelState.IsValid)
             {
-                string imagePath = Server.MapPath("~/Images/" + file.FileName);
-                file.SaveAs(imagePath);
+                if (file.FileName == "")
+                {
+                    
+                }
+                else
+                {
+                    string imagePath = Server.MapPath("~/Images/" + file.FileName);
+                    file.SaveAs(imagePath);
 
-                category.ImagePath = "Images/" + file.FileName;
+                    category.ImagePath = "Images/" + file.FileName;
 
-                db.Entry(category).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                    db.Entry(category).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                
             }
             return View(category);
         }
