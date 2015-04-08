@@ -70,10 +70,6 @@ namespace MVC_Group_Project.Models
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
-
-        //public int AccessLevelID = 1;
-        //[ForeignKey("AccessLevelID")]
-        //public AccessLevel al;
     }
 
     public class RegisterViewModel
@@ -105,13 +101,6 @@ namespace MVC_Group_Project.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
-
-        //public int AccessLevelID = 1;
-        //[ForeignKey("AccessLevelID")]
-        //public AccessLevel al;
-
-        //[Required]
-        //public string roleName { get; set; }
 
     }
 

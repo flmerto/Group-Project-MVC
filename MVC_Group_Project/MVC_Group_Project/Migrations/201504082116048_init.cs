@@ -18,6 +18,19 @@ namespace MVC_Group_Project.Migrations
                 .PrimaryKey(t => t.CategoryID);
             
             CreateTable(
+                "dbo.CreditCards",
+                c => new
+                    {
+                        CreditCardID = c.Int(nullable: false, identity: true),
+                        CardType = c.String(),
+                        CardHolderName = c.String(),
+                        ExpiryDate = c.DateTime(nullable: false),
+                        CSC = c.Int(nullable: false),
+                        UserID = c.String(),
+                    })
+                .PrimaryKey(t => t.CreditCardID);
+            
+            CreateTable(
                 "dbo.AspNetRoles",
                 c => new
                     {
@@ -124,6 +137,7 @@ namespace MVC_Group_Project.Migrations
             DropTable("dbo.SubCategories");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetRoles");
+            DropTable("dbo.CreditCards");
             DropTable("dbo.Categories");
         }
     }
