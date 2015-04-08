@@ -11,10 +11,10 @@
 </p>
 <table class="table table-striped table-hover ">
     <tr>
-        <th>
-            @*@Html.DisplayNameFor(model => model.cat.ImagePath)*@
-            @*Category Image*@
-        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.cat.ImagePath)
+            Category Image
+        </th>*@
         <th>
             @*@Html.DisplayNameFor(model => model.SubCategoryName)*@
             SubCategory
@@ -28,24 +28,24 @@
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @*@Html.DisplayFor(modelItem => item.cat.ImagePath)*@
-                @*<img src="../../@Html.DisplayFor(model => item.cat.ImagePath)" style="height:50px; width:50px" />*@
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SubCategoryName)
-            </td>
-            <td>
-                @*@Html.DisplayFor(modelItem => item.ImagePath)*@
-                <img src="../../@Html.DisplayFor(model => item.ImagePath)" style="height:50px; width:50px" />
-            </td>
-            <td>
+    <tr>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.cat.ImagePath)
+            <img src="../../@Html.DisplayFor(model => item.cat.ImagePath)" style="height:50px; width:50px" />
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.SubCategoryName)
+        </td>
+        <td>
+            @*@Html.DisplayFor(modelItem => item.ImagePath)*@
+            <img src="../../@Html.DisplayFor(model => item.ImagePath)" style="height:50px; width:50px" />
+        </td>
+        <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.SubCategoryID }) |
                 @Html.ActionLink("Details", "Details", new { id = item.SubCategoryID }) |
                 @Html.ActionLink("Delete", "Delete", new { id = item.SubCategoryID })
-            </td>
-        </tr>
-    }
+        </td>
+    </tr>
+}
 
 </table>

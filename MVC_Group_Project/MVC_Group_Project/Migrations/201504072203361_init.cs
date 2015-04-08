@@ -8,15 +8,6 @@ namespace MVC_Group_Project.Migrations
         public override void Up()
         {
             CreateTable(
-                "dbo.AccessLevels",
-                c => new
-                    {
-                        AccessLevelID = c.Int(nullable: false, identity: true),
-                        AccessType = c.String(),
-                    })
-                .PrimaryKey(t => t.AccessLevelID);
-            
-            CreateTable(
                 "dbo.Categories",
                 c => new
                     {
@@ -67,10 +58,10 @@ namespace MVC_Group_Project.Migrations
                 c => new
                     {
                         Id = c.String(nullable: false, maxLength: 128),
-                        AccessLevelID = c.Int(nullable: false),
                         Address = c.String(),
                         LastName = c.String(),
                         FirstName = c.String(),
+                        RoleName = c.String(),
                         Email = c.String(maxLength: 256),
                         EmailConfirmed = c.Boolean(nullable: false),
                         PasswordHash = c.String(),
@@ -134,7 +125,6 @@ namespace MVC_Group_Project.Migrations
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetRoles");
             DropTable("dbo.Categories");
-            DropTable("dbo.AccessLevels");
         }
     }
 }

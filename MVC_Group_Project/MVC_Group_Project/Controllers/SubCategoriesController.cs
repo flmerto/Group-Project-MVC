@@ -76,6 +76,7 @@ namespace MVC_Group_Project.Controllers
             if (subCategory == null)
             {
                 return HttpNotFound();
+            
             }
 
             ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName");
