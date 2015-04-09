@@ -26,7 +26,6 @@ namespace MVC_Group_Project.Migrations
                         CardHolderName = c.String(),
                         ExpiryDate = c.DateTime(nullable: false),
                         CSC = c.Int(nullable: false),
-                        UserID = c.String(),
                     })
                 .PrimaryKey(t => t.CreditCardID);
             

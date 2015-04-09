@@ -15,6 +15,6 @@ namespace MVC_Group_Project.Models
         public string CardHolderName { get; set; }
         public DateTime ExpiryDate { get; set; }
         public int CSC { get; set; }
-        public string UserID { get; set; }
+        
     }
 }
