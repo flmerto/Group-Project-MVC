@@ -15,6 +15,11 @@ namespace MVC_Group_Project.Models
         public string CardHolderName { get; set; }
         public DateTime ExpiryDate { get; set; }
         public int CSC { get; set; }
-        
+
+        [MaxLength(120), ForeignKey("ApplicationUser")]
+        public virtual string UserId { get; set; }
+
+        public virtual ApplicationUser ApplicationUser { get; set; }
+
     }
 }
