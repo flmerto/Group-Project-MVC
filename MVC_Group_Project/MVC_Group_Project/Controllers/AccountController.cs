@@ -164,6 +164,7 @@ namespace MVC_Group_Project.Controllers
 
                 if (result.Succeeded)
                 {
+                    
                     await SignInAsync(user, isPersistent: false);
 
                     var role = RoleManager.FindByName("Member");

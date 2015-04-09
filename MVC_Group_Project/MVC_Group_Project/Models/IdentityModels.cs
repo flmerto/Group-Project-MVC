@@ -53,6 +53,7 @@ namespace MVC_Group_Project.Models
         public System.Data.Entity.DbSet<MVC_Group_Project.Models.SubCategory> SubCategories { get; set; }
 
         public System.Data.Entity.DbSet<MVC_Group_Project.Models.CreditCard> CreditCards { get; set; }
+
     }
 
 

@@ -8,7 +8,7 @@ using System.Web;
 
 namespace MVC_Group_Project.Models
 {
-    public class CreditCard
+    public class CreditCard 
     {
         public int CreditCardID { get; set; }
         public string CardType { get; set; }
@@ -16,5 +16,6 @@ namespace MVC_Group_Project.Models
         public DateTime ExpiryDate { get; set; }
         public int CSC { get; set; }
         public string UserID { get; set; }
+
     }
 }
