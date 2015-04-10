@@ -155,7 +155,6 @@ namespace MVC_Group_Project.Controllers
                     ModelState.AddModelError("", adminresult.Errors.First());
                     ViewBag.RoleId = new SelectList(RoleManager.Roles, "Name", "Name");
                     return View();
-
                 }
                 return RedirectToAction("Index");
             }
