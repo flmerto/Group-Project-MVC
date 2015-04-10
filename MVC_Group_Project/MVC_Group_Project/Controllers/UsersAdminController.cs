@@ -11,10 +11,11 @@ using System.Web;
 using System.Web.Mvc;
 using MVC_Group_Project;
 using MVC_Group_Project.Models;
+using MVC_Group_Project.Filters;
 
 namespace MVC_Group_Project.Controllers
 {
-    //[Authorize(Roles = "Admin")]
+  [CustomAuthorization(Role = "Admin")] 
     public class UsersAdminController : Controller
     {
         public UsersAdminController()

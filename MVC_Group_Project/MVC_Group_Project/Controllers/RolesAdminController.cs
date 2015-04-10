@@ -9,10 +9,11 @@ using System.Web.Mvc;
 using System.Collections.Generic;
 using MVC_Group_Project;
 using MVC_Group_Project.Models;
+using MVC_Group_Project.Filters;
 
 namespace MVC_Group_Project.Controllers
 {
-    //[Authorize(Roles = "Admin")]
+    [CustomAuthorization(Role = "Admin")] 
     public class RolesAdminController : Controller
     {
         public RolesAdminController()
