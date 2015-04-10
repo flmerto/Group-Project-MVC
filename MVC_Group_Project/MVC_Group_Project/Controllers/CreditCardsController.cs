@@ -8,10 +8,12 @@ using System.Web;
 using System.Web.Mvc;
 using MVC_Group_Project.Models;
 using Microsoft.AspNet.Identity;
+using MVC_Group_Project.Filters;
 
 
 namespace MVC_Group_Project.Controllers
 {
+    [CustomAuthorization(Role = "Admin")] 
     public class CreditCardsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
