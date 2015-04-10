@@ -345,7 +345,7 @@ namespace MVC_Group_Project.Controllers
         // POST: /Account/Manage
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Manage(ManageUserViewModel model)
+        public async Task<ActionResult> Manage(ManageUserViewModel model, [Bind(Include = "CreditCardID,CardType,CardHolderName,ExpiryDate,CSC")] CreditCard cc)
         {
             bool hasPassword = HasPassword();
             ViewBag.HasLocalPassword = hasPassword;
@@ -354,16 +354,31 @@ namespace MVC_Group_Project.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    IdentityResult result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword, model.NewPassword);
-                    if (result.Succeeded)
+                    if (cc.CardType != null)
                     {
-                        var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
-                        await SignInAsync(user, isPersistent: false);
-                        return RedirectToAction("Manage", new { Message = ManageMessageId.ChangePasswordSuccess });
+                        var userId = User.Identity.GetUserId();
+                        cc.UserId = userId;
+
+                        db.CreditCards.Add(cc);
+                        db.SaveChanges();
+
+                        return Redirect("../Home/Index");
+                        //return View(cc);
                     }
                     else
                     {
-                        AddErrors(result);
+                        IdentityResult result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword, model.NewPassword);
+                        if (result.Succeeded)
+                        {
+                            var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+                            await SignInAsync(user, isPersistent: false);
+                            return RedirectToAction("Manage", new { Message = ManageMessageId.ChangePasswordSuccess });
+                        }
+                        else
+                        {
+                            AddErrors(result);
+                        }
+
                     }
                 }
             }
