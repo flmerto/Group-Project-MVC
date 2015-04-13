@@ -2,10 +2,10 @@
 @using Microsoft.AspNet.Identity;
 @model MVC_Group_Project.Models.CreditCard
 
-
 @{
     ViewBag.Title = "Manage Account";
 }
+
 
 <h2>@ViewBag.Title.</h2>
 
@@ -16,8 +16,6 @@
     <li><a href="#editProfile" data-toggle="tab">Edit Profile</a></li>
     <li><a href="#AccountBalance" data-toggle="tab">Account Balance</a></li>
 </ul>
-
-
 
 <div id="myTabContent" class="tab-content">
     <div class="tab-pane fade active in" id="ChangePassword">
@@ -40,49 +38,53 @@
         <p> Edit Profile</p>
     </div>
 
-
     <div class="tab-pane fade" id="AccountBalance">
         <div class="form-horizontal">
             <h3 style="padding-left:60px; padding-top:15px">Add Balance</h3>
             <hr />
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="form-group">
-                @Html.LabelFor(model => model.CardType, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.CardType, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.CardType, "", new { @class = "text-danger" })
-                </div>
-            </div>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.CardHolderName, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.CardHolderName, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.CardHolderName, "", new { @class = "text-danger" })
-                </div>
-            </div>
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.CardType, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.CardType, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.CardType, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.ExpiryDate, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.ExpiryDate, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.ExpiryDate, "", new { @class = "text-danger" })
-                </div>
-            </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.CardHolderName, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.CardHolderName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.CardHolderName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.CSC, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.CSC, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.CSC, "", new { @class = "text-danger" })
-                </div>
-            </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ExpiryDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.ExpiryDate, new { htmlAttributes = new { @class = "form-control datepicker" } })
+                            @Html.ValidationMessageFor(model => model.ExpiryDate, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
 
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Add" class="btn btn-default" />
-                </div>
-            </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.CSC, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.CSC, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.CSC, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Add" class="btn btn-default" />
+                        </div>
+                    </div>
+        }
         </div>
     </div>
 
@@ -92,6 +94,22 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
+    @*<script type="text/javascript">
+        $(function () { // will trigger when the document is ready
+            $('.datepicker').datepicker(); //Initialise any date pickers
+        });
+
+        bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
+                  "~/Scripts/bootstrap.js",
+                  "~/Scripts/bootstrap-datepicker.js",    // ** NEW for Bootstrap Datepicker
+                  "~/Scripts/respond.js"));
+
+        bundles.Add(new StyleBundle("~/Content/css").Include(
+                  "~/Content/bootstrap.css",
+                  "~/Content/bootstrap-datepicker.css",  // ** NEW for Bootstrap Datepicker
+                  "~/Content/site.css"));
+    </script>*@
 }
 
 
