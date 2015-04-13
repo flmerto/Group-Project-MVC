@@ -1,0 +1,69 @@
+﻿@model IEnumerable<MVC_Group_Project.Models.BiddingItem>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ItemName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ItemDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ItemImageURL)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BidStartTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BidEndTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BidStartPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CurrentPrice)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ItemName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ItemDescription)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ItemImageURL)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BidStartTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BidEndTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BidStartPrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CurrentPrice)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.BiddingItemID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.BiddingItemID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.BiddingItemID })
+        </td>
+    </tr>
+}
+
+</table>

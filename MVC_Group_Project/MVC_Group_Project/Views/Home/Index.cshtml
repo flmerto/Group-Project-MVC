@@ -1,33 +1,58 @@
-﻿@{
+﻿@model IEnumerable<MVC_Group_Project.Models.BiddingItem>
+
+@{
     ViewBag.Title = "Home Page";
 }
 
 <div class="jumbotron">
     <h1>Add New Item</h1>
     <p class="lead">Add new item here!</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Add an Item! &raquo;</a></p>
+    <a>@Html.ActionLink("Bid New Item", "Create", "BiddingItems")</a>
 </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            
-        </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>
-        
-        </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>
 
-        </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>
+
+@foreach (var item in Model) {
+    <table class="table">
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ItemName)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ItemDescription)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <img src="../../@Html.DisplayFor(model => item.ItemImageURL)" style="height:50px; width:50px" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BidStartTime)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BidEndTime)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BidStartPrice)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CurrentPrice)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a class="btn btn-default" @Html.ActionLink("Bid","Create","BiddingItems")></a>
+            </td>
+        </tr>
+    </table>
+ }

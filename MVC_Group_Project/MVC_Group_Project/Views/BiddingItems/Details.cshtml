@@ -1,0 +1,69 @@
+﻿@model MVC_Group_Project.Models.BiddingItem
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Bidding Item:</h2>
+
+<div>
+    <h4>Details</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ItemName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ItemName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ItemDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ItemDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ItemImageURL)
+        </dt>
+
+        <dd>
+            @*@Html.DisplayFor(model => model.ItemImageURL)*@
+            <img src="../../@Html.DisplayFor(model => model.ItemImageURL)" style="height:150px; width:150px" />
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StartAndEnd)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StartAndEnd)
+        </dd>
+
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BidStartPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BidStartPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CurrentPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CurrentPrice)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.BiddingItemID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

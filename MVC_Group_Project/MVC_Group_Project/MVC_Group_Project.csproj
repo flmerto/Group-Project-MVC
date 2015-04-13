@@ -159,6 +159,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BiddingItemsController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\CreditCardsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -168,9 +169,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201504091950576_init.cs" />
-    <Compile Include="Migrations\201504091950576_init.Designer.cs">
-      <DependentUpon>201504091950576_init.cs</DependentUpon>
+    <Compile Include="Migrations\201504092235088_init.cs" />
+    <Compile Include="Migrations\201504092235088_init.Designer.cs">
+      <DependentUpon>201504092235088_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -261,6 +262,11 @@
     <Content Include="Views\CreditCards\Details.cshtml" />
     <Content Include="Views\CreditCards\Edit.cshtml" />
     <Content Include="Views\CreditCards\Index.cshtml" />
+    <Content Include="Views\BiddingItems\Create.cshtml" />
+    <Content Include="Views\BiddingItems\Delete.cshtml" />
+    <Content Include="Views\BiddingItems\Details.cshtml" />
+    <Content Include="Views\BiddingItems\Edit.cshtml" />
+    <Content Include="Views\BiddingItems\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -274,8 +280,8 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201504091950576_init.resx">
-      <DependentUpon>201504091950576_init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201504092235088_init.resx">
+      <DependentUpon>201504092235088_init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

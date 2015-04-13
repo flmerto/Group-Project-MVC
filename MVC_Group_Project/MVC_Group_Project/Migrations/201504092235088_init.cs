@@ -8,6 +8,21 @@ namespace MVC_Group_Project.Migrations
         public override void Up()
         {
             CreateTable(
+                "dbo.BiddingItems",
+                c => new
+                    {
+                        BiddingItemID = c.Int(nullable: false, identity: true),
+                        ItemName = c.String(nullable: false),
+                        ItemDescription = c.String(nullable: false),
+                        ItemImageURL = c.String(),
+                        BidStartTime = c.DateTime(nullable: false),
+                        BidEndTime = c.DateTime(nullable: false),
+                        BidStartPrice = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        CurrentPrice = c.Decimal(nullable: false, precision: 18, scale: 2),
+                    })
+                .PrimaryKey(t => t.BiddingItemID);
+            
+            CreateTable(
                 "dbo.Categories",
                 c => new
                     {
@@ -143,6 +158,7 @@ namespace MVC_Group_Project.Migrations
             DropTable("dbo.AspNetUsers");
             DropTable("dbo.CreditCards");
             DropTable("dbo.Categories");
+            DropTable("dbo.BiddingItems");
         }
     }
 }

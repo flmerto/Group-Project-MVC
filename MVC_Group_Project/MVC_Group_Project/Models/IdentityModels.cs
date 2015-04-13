@@ -54,6 +54,8 @@ namespace MVC_Group_Project.Models
 
         public System.Data.Entity.DbSet<MVC_Group_Project.Models.CreditCard> CreditCards { get; set; }
 
+        public System.Data.Entity.DbSet<MVC_Group_Project.Models.BiddingItem> BiddingItems { get; set; }
+
     }
 
 
