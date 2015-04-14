@@ -19,11 +19,20 @@ namespace MVC_Group_Project.Models
         public string ItemImageURL { get; set; }
 
 
+        public int SubCategoryID { get; set; }
+
+        [ForeignKey("SubCategoryID")]
+        public SubCategory Sub { get; set; }
+
+        [DataType(DataType.Date)]
         [Required]
         public DateTime BidStartTime { get; set; }
+        
+        [DataType(DataType.Date)]
         [Required]
         public DateTime BidEndTime { get; set; }
 
+        [DataType(DataType.Date)]
         public string StartAndEnd
         {
             get
@@ -32,9 +41,12 @@ namespace MVC_Group_Project.Models
             }
         }
 
+        [DataType(DataType.Currency)]
         [Required]
         public decimal BidStartPrice { get; set; }
+        [DataType(DataType.Currency)]
         [Required]
         public decimal CurrentPrice { get; set; }
+
     }
 }

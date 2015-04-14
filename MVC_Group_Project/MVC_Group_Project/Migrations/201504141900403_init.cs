@@ -15,12 +15,28 @@ namespace MVC_Group_Project.Migrations
                         ItemName = c.String(nullable: false),
                         ItemDescription = c.String(nullable: false),
                         ItemImageURL = c.String(),
+                        SubCategoryID = c.Int(nullable: false),
                         BidStartTime = c.DateTime(nullable: false),
                         BidEndTime = c.DateTime(nullable: false),
                         BidStartPrice = c.Decimal(nullable: false, precision: 18, scale: 2),
                         CurrentPrice = c.Decimal(nullable: false, precision: 18, scale: 2),
                     })
-                .PrimaryKey(t => t.BiddingItemID);
+                .PrimaryKey(t => t.BiddingItemID)
+                .ForeignKey("dbo.SubCategories", t => t.SubCategoryID, cascadeDelete: true)
+                .Index(t => t.SubCategoryID);
+            
+            CreateTable(
+                "dbo.SubCategories",
+                c => new
+                    {
+                        SubCategoryID = c.Int(nullable: false, identity: true),
+                        SubCategoryName = c.String(),
+                        ImagePath = c.String(),
+                        CategoryID = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.SubCategoryID)
+                .ForeignKey("dbo.Categories", t => t.CategoryID, cascadeDelete: true)
+                .Index(t => t.CategoryID);
             
             CreateTable(
                 "dbo.Categories",
@@ -119,30 +135,17 @@ namespace MVC_Group_Project.Migrations
                 .PrimaryKey(t => t.Id)
                 .Index(t => t.Name, unique: true, name: "RoleNameIndex");
             
-            CreateTable(
-                "dbo.SubCategories",
-                c => new
-                    {
-                        SubCategoryID = c.Int(nullable: false, identity: true),
-                        SubCategoryName = c.String(),
-                        ImagePath = c.String(),
-                        CategoryID = c.Int(nullable: false),
-                    })
-                .PrimaryKey(t => t.SubCategoryID)
-                .ForeignKey("dbo.Categories", t => t.CategoryID, cascadeDelete: true)
-                .Index(t => t.CategoryID);
-            
         }
         
         public override void Down()
         {
-            DropForeignKey("dbo.SubCategories", "CategoryID", "dbo.Categories");
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
             DropForeignKey("dbo.CreditCards", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
-            DropIndex("dbo.SubCategories", new[] { "CategoryID" });
+            DropForeignKey("dbo.BiddingItems", "SubCategoryID", "dbo.SubCategories");
+            DropForeignKey("dbo.SubCategories", "CategoryID", "dbo.Categories");
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
@@ -150,7 +153,8 @@ namespace MVC_Group_Project.Migrations
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
             DropIndex("dbo.CreditCards", new[] { "UserId" });
-            DropTable("dbo.SubCategories");
+            DropIndex("dbo.SubCategories", new[] { "CategoryID" });
+            DropIndex("dbo.BiddingItems", new[] { "SubCategoryID" });
             DropTable("dbo.AspNetRoles");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetUserLogins");
@@ -158,6 +162,7 @@ namespace MVC_Group_Project.Migrations
             DropTable("dbo.AspNetUsers");
             DropTable("dbo.CreditCards");
             DropTable("dbo.Categories");
+            DropTable("dbo.SubCategories");
             DropTable("dbo.BiddingItems");
         }
     }

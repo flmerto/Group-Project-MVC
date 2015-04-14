@@ -5,54 +5,47 @@
 }
 
 <div class="jumbotron">
-    <h1>Add New Item</h1>
-    <p class="lead">Add new item here!</p>
-    <a>@Html.ActionLink("Bid New Item", "Create", "BiddingItems")</a>
+    <div style="text-align:center">
+        <img height="200" width="600" src="~/Images/bidding3.jpg" />
+    </div>
+   
+   
+    <h2>New Item</h2>
+    <a>@Html.ActionLink("Add Bid New Item Here!", "Create", "BiddingItems")</a>
 </div>
 
 
+<div style="align-self:center">
+    @foreach (var item in Model)
+    {
+        <div class="col-sm-3" style="">
+            <div class="panel panel-primary" style="text-align:center">
+                <div class="panel-heading">
+                    <h3 class="panel-title">@Html.DisplayFor(modelItem => item.ItemName)</h3>
+                </div>
+                <div class="panel-body" style="text-align:center">
 
-@foreach (var item in Model) {
-    <table class="table">
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ItemName)
-            </td>
-        </tr>
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ItemDescription)
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <img src="../../@Html.DisplayFor(model => item.ItemImageURL)" style="height:50px; width:50px" />
-            </td>
-        </tr>
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.BidStartTime)
-            </td>
-        </tr>
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.BidEndTime)
-            </td>
-        </tr>
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.BidStartPrice)
-            </td>
-        </tr>
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.CurrentPrice)
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <a class="btn btn-default" @Html.ActionLink("Bid","Create","BiddingItems")></a>
-            </td>
-        </tr>
-    </table>
- }
+                    <img src="../../@Html.DisplayFor(model => item.ItemImageURL)" style="height:150px; width:200px" />
+                    <dl>
+
+                        @*@Html.DisplayFor(modelItem => item.BidStartTime)
+                            @Html.DisplayFor(modelItem => item.BidEndTime)
+                            @Html.DisplayFor(modelItem => item.CurrentPrice)
+                        *@
+                        <dt>
+                            @Html.DisplayFor(modelItem => item.ItemDescription)
+                        </dt>
+                        <dt>
+                            @Html.DisplayFor(modelItem => item.BidEndTime)
+                        </dt>
+                        <dt>
+                            @Html.DisplayFor(modelItem => item.BidStartPrice)
+
+                        </dt>
+                    </dl>
+                    <div class="btn btn-warning" @Html.ActionLink("Bid Now!", "Create", "BiddingItems")><span class="glyphicon glyphicon-ok"></span> </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
