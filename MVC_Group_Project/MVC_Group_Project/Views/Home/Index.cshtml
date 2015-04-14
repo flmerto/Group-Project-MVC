@@ -19,14 +19,26 @@
             <h3 class="panel-title">@Html.DisplayFor(modelItem => item.ItemName)</h3>
         </div>
         <div class="panel-body" style="text-align:center">
-           @Html.DisplayFor(modelItem => item.ItemDescription)
-            <img src="../../@Html.DisplayFor(model => item.ItemImageURL)" style="height:100px; width:100px" />
-            @Html.DisplayFor(modelItem => item.BidStartTime)
-            @Html.DisplayFor(modelItem => item.BidEndTime)
-            @Html.DisplayFor(modelItem => item.BidStartPrice)
-            @Html.DisplayFor(modelItem => item.BidEndTime)
-            @Html.DisplayFor(modelItem => item.CurrentPrice)
-            <div class="btn btn-warning" @Html.ActionLink("Bid", "Create", "BiddingItems")> <span class="glyphicon glyphicon-ok"></span></div> 
+            
+                <img src="../../@Html.DisplayFor(model => item.ItemImageURL)" style="height:150px; width:200px" />
+                <dl>
+
+                    @*@Html.DisplayFor(modelItem => item.BidStartTime)
+                    @Html.DisplayFor(modelItem => item.BidEndTime)
+                    @Html.DisplayFor(modelItem => item.CurrentPrice)
+                    *@
+                    <dt>
+                        @Html.DisplayFor(modelItem => item.ItemDescription)
+                    </dt>
+                    <dt>
+                        @Html.DisplayFor(modelItem => item.BidEndTime)
+                    </dt>
+                    <dt>
+                        @Html.DisplayFor(modelItem => item.BidStartPrice)
+                      
+                    </dt>              
+            </dl>
+            <div class="btn btn-warning" @Html.ActionLink("Bid Now!", "Create", "BiddingItems")><span class="glyphicon glyphicon-ok"></span> </div> 
         </div>
     </div>
     
