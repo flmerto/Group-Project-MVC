@@ -205,35 +205,52 @@ namespace MVC_Group_Project.Controllers
                 {
                     return HttpNotFound();
                 }
-
-                user.UserName = editUser.Email;
-                user.Email = editUser.Email;
-                user.FirstName = editUser.FirstName;
-                user.LastName = editUser.LastName;
-                user.Address = editUser.Address;
+                if (user.FirstName == "" && user.LastName == "" && user.Address == "")
+                {
+                    user.UserName = user.UserName;
+                    user.Email = user.Email;
+                    user.FirstName = user.FirstName;
+                    user.LastName = user.LastName;
+                    user.Address = user.Address;
+                }
+                else
+                {
+                    user.UserName = editUser.Email;
+                    user.Email = editUser.Email;
+                    user.FirstName = editUser.FirstName;
+                    user.LastName = editUser.LastName;
+                    user.Address = editUser.Address;
+                }
 
                 //await UserManager.RemovePasswordAsync(user.Id);
                 //await UserManager.AddPasswordAsync(user.Id, editUser.Password);
 
                 var userRoles = await UserManager.GetRolesAsync(user.Id);
-
-                selectedRole = selectedRole ?? new string[] { };
-
-                //var result = await UserManager.AddToRolesAsync(user.Id, selectedRole.Except(userRoles).ToArray<string>()); // doesn't find Roles, only Role TODO!
-                var result = await UserManager.AddToRoleAsync(user.Id, selectedRole[0]); // needs to be fixed.
-                if (!result.Succeeded)
+                if (selectedRole[0] == "Admin" || selectedRole[0] == "Member")
                 {
-                    ModelState.AddModelError("", result.Errors.First());
-                    return View();
+                    await UserManager.UpdateAsync(user);
+                    return RedirectToAction("Index");
                 }
-                //result = await UserManager.RemoveFromRolesAsync(user.Id, userRoles.Except(selectedRole).ToArray<string>()); // doesn't find Roles, only Role TODO!
-                result = await UserManager.RemoveFromRoleAsync(user.Id, selectedRole[0]);// needs to be fixed.
-                if (!result.Succeeded)
+                else
                 {
-                    ModelState.AddModelError("", result.Errors.First());
-                    return View();
+                    selectedRole = selectedRole ?? new string[] { };
+
+                    //var result = await UserManager.AddToRolesAsync(user.Id, selectedRole.Except(userRoles).ToArray<string>()); // doesn't find Roles, only Role TODO!
+                    var result = await UserManager.AddToRoleAsync(user.Id, selectedRole[0]); // needs to be fixed.
+                    if (!result.Succeeded)
+                    {
+                        ModelState.AddModelError("", result.Errors.First());
+                        return View();
+                    }
+                    //result = await UserManager.RemoveFromRolesAsync(user.Id, userRoles.Except(selectedRole).ToArray<string>()); // doesn't find Roles, only Role TODO!
+                    result = await UserManager.RemoveFromRoleAsync(user.Id, selectedRole[0]);// needs to be fixed.
+                    if (!result.Succeeded)
+                    {
+                        ModelState.AddModelError("", result.Errors.First());
+                        return View();
+                    }
+                    return RedirectToAction("Index");
                 }
-                return RedirectToAction("Index");
             }
             ModelState.AddModelError("", "Something failed.");
             return View();

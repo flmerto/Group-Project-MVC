@@ -1,6 +1,6 @@
 ﻿@using MVC_Group_Project.Models;
 @using Microsoft.AspNet.Identity;
-@model MVC_Group_Project.Models.CreditCard
+@model MVC_Group_Project.Models.EditUserViewModel
 
 @{
     ViewBag.Title = "Manage Account";
@@ -35,62 +35,53 @@
 
 
     <div class="tab-pane fade" id="editProfile">
-        <p> Edit Profile</p>
+        <div class="form-horizontal">
+            @using (Html.BeginForm()) //"Edit", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }
+            {
+                @Html.AntiForgeryToken()
+                <h2 style="padding-left:90px">Edit Information</h2>
+                <hr />
+                @Html.ValidationSummary("", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(m => m.FirstName, "First Name", new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.LastName, "Last Name", new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Address, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.Address, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" class="btn btn-default" value="Edit" />
+                    </div>
+                </div>
+            }
+        </div>
     </div>
 
     <div class="tab-pane fade" id="AccountBalance">
         <div class="form-horizontal">
-            <h3 style="padding-left:60px; padding-top:15px">Add Balance</h3>
-            <hr />
-        @using (Html.BeginForm())
-        {
-            @Html.AntiForgeryToken()
-
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.CardType, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.CardType, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.CardType, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.CardHolderName, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.CardHolderName, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.CardHolderName, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.ExpiryDate, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.ExpiryDate, new { htmlAttributes = new { @class = "form-control datepicker" } })
-                            @Html.ValidationMessageFor(model => model.ExpiryDate, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.CSC, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.CSC, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.CSC, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
-                            <input type="submit" value="Add" class="btn btn-default" />
-                        </div>
-                    </div>
-        }
+            @{Html.RenderAction("Create", "CreditCards");}
         </div>
     </div>
 
 </div>
-
-
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

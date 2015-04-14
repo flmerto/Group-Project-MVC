@@ -97,52 +97,6 @@ namespace MVC_Group_Project.Controllers
             return View(model);
         }
 
-
-        // GET: Account/Edit/5
-        //public ActionResult Edit(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
-        //    }
-
-        //    ApplicationUser user = db.Users.Find(id);
-        //    EditViewModel editViewUser = new EditViewModel();
-        //    editViewUser.AccessLevelID = user.AccessLevelID;
-        //    editViewUser.Email = user.Email;
-        //    editViewUser.FirstName = user.FirstName;
-        //    editViewUser.LastName = user.LastName;
-        //    editViewUser.Address = user.Address;
-
-        //    if (user == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(editViewUser);
-        //}
-
-        //// POST: Account/Edit/5
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Edit([Bind(Include = "ID, FirstName, LastName, Address, Email, AccessLevelID")] EditViewModel editUser, int? id)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        ApplicationUser user = db.Users.Find(id);
-        //        user.AccessLevelID = editUser.AccessLevelID;
-        //        user.Email = editUser.Email;
-        //        user.FirstName = editUser.FirstName;
-        //        user.LastName = editUser.LastName;
-        //        user.Address = editUser.Address;
-
-        //        db.Entry(user).State = EntityState.Modified;
-        //        db.SaveChanges();
-        //        return RedirectToAction("Index");
-        //    }
-        //    return View(editUser);
-        //}
-
-        //
         // GET: /Account/Register
         [AllowAnonymous]
         public ActionResult Register()
@@ -345,7 +299,7 @@ namespace MVC_Group_Project.Controllers
         // POST: /Account/Manage
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Manage(ManageUserViewModel model, [Bind(Include = "CreditCardID,CardType,CardHolderName,ExpiryDate,CSC")] CreditCard cc)
+        public async Task<ActionResult> Manage(ManageUserViewModel model, CreditCard cc, EditUserViewModel editUser)
         {
             bool hasPassword = HasPassword();
             ViewBag.HasLocalPassword = hasPassword;
@@ -364,6 +318,49 @@ namespace MVC_Group_Project.Controllers
 
                         return Redirect("../Home/Index");
                         //return View(cc);
+                    }
+                    else if (editUser.FirstName != null)
+                    {
+                        var userId = User.Identity.GetUserId();
+                        editUser.Id = userId;
+                        var user = await UserManager.FindByIdAsync(editUser.Id);
+                        var role = await RoleManager.FindByIdAsync(user.Roles.FirstOrDefault().RoleId);
+                        if (user == null)
+                        {
+                            return HttpNotFound();
+                        }
+                        user.UserName = editUser.Email;
+                        user.Email = editUser.Email;
+                        user.FirstName = editUser.FirstName;
+                        user.LastName = editUser.LastName;
+                        user.Address = editUser.Address;
+                        user.RoleName = role.Name;
+
+                        var userRoles = await UserManager.GetRolesAsync(user.Id);
+                        //selectedRole = selectedRole ?? new string[] { };
+
+                        if (userRoles.FirstOrDefault() == "Admin" || userRoles.FirstOrDefault() == "Member")
+                        {
+                            await UserManager.UpdateAsync(user);
+                            return RedirectToAction("Manage");
+                        }
+                        else
+                        {
+                            //var result = await UserManager.AddToRolesAsync(user.Id, selectedRole.Except(userRoles).ToArray<string>()); // doesn't find Roles, only Role TODO!
+                            var result = await UserManager.AddToRoleAsync(user.Id, userRoles.FirstOrDefault()); // needs to be fixed.
+                            if (!result.Succeeded)
+                            {
+                                ModelState.AddModelError("", result.Errors.First());
+                                return View();
+                            }
+                            //result = await UserManager.RemoveFromRolesAsync(user.Id, userRoles.Except(selectedRole).ToArray<string>()); // doesn't find Roles, only Role TODO!
+                            result = await UserManager.RemoveFromRoleAsync(user.Id, userRoles.FirstOrDefault());// needs to be fixed.
+                            if (!result.Succeeded)
+                            {
+                                ModelState.AddModelError("", result.Errors.First());
+                                return View();
+                            }
+                        }
                     }
                     else
                     {
@@ -404,7 +401,6 @@ namespace MVC_Group_Project.Controllers
                     }
                 }
             }
-
             // If we got this far, something failed, redisplay form
             return View(model);
         }
