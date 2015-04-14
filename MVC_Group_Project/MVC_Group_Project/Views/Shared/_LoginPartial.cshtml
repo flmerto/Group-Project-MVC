@@ -4,13 +4,12 @@
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
     @Html.AntiForgeryToken()
-
     
     if(User.IsInRole("Admin"))
         { 
         <ul class="nav navbar-nav navbar-right">
             <li>
-                @Html.ActionLink("Hello " + User.Identity.GetUserName()+ "!", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })
+                @Html.ActionLink("Hello (Admin) " + User.Identity.GetUserName()+ "!", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })
             </li>
             <li class="dropdown" style="margin-left:-28px;">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -19,7 +18,7 @@
                 <ul class="dropdown-menu" role="menu">
                     <li> @Html.ActionLink("Client", "Index", "UsersAdmin")</li>
                     <li> @Html.ActionLink("Roles", "Index", "RolesAdmin") </li>
-                    <li> <a href="#">Bidding Items</a></li>
+                    <li> @Html.ActionLink("BiddingItems","Index","BiddingItems")</li>
                     <li> @Html.ActionLink("Category", "Index", "Categories") </li>
                      <li style="padding-left:20px"> @Html.ActionLink("SubCategory", "Index", "SubCategories")</li>  
                     <li> <a href="#">History/Report</a></li>

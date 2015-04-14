@@ -28,19 +28,19 @@ namespace MVC_Group_Project.Models
     {
         public string Id { get; set; }
 
-        [Required(AllowEmptyStrings = false)]
+        //[Required(AllowEmptyStrings = false)]
         [Display(Name = "FirstName")]
         public string FirstName { get; set; }
 
-        [Required(AllowEmptyStrings = false)]
+        //[Required(AllowEmptyStrings = false)]
         [Display(Name = "LastName")]
         public string LastName { get; set; }
 
-        [Required(AllowEmptyStrings = false)]
+        //[Required(AllowEmptyStrings = false)]
         [Display(Name = "Address")]
         public string Address { get; set; }
 
-        [Required(AllowEmptyStrings = false)]
+        //[Required(AllowEmptyStrings = false)]
         [Display(Name = "Email")]
         [EmailAddress]
         public string Email { get; set; }
