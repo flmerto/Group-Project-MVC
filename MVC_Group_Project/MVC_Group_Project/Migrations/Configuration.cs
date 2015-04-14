@@ -9,7 +9,7 @@ namespace MVC_Group_Project.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationsEnabled = false;
         }
 
         protected override void Seed(MVC_Group_Project.Models.ApplicationDbContext context)

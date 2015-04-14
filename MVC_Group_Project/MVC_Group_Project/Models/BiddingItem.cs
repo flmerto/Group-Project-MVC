@@ -10,7 +10,7 @@ namespace MVC_Group_Project.Models
 {
     public class BiddingItem
     {
-        
+     
         public int BiddingItemID { get; set; }
         [Required]
         public string ItemName { get; set; }
@@ -19,6 +19,10 @@ namespace MVC_Group_Project.Models
         public string ItemImageURL { get; set; }
 
 
+        public int SubCategoryID { get; set; }
+
+        [ForeignKey("SubCategoryID")]
+        public SubCategory Sub { get; set; }
         [Required]
         public DateTime BidStartTime { get; set; }
         [Required]

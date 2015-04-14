@@ -36,10 +36,11 @@ namespace MVC_Group_Project.Controllers
         }
 
         // GET: BiddingItems/Create
-        [Authorize]
+   
         public ActionResult Create()
         {
-            return View();
+            return View(db.SubCategories.ToList());
+           
         }
 
         // POST: BiddingItems/Create

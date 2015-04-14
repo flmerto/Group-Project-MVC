@@ -1,4 +1,4 @@
-﻿@model MVC_Group_Project.Models.BiddingItem
+﻿@model Tuple<MVC_Group_Project.Models.BiddingItem, IEnumerable<MVC_Group_Project.Models.SubCategory>>
 
 @{
     ViewBag.Title = "Create";
@@ -13,60 +13,60 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
+    
+        @foreach (var sub in Model.Item2)
+        {
+             @Html.DropDownList(sub.SubCategoryName);
+        }
+    
+          
+
         <div class="form-group">
-            @Html.LabelFor(model => model.ItemName, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(tuple => tuple.Item1.ItemName, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ItemName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ItemName, "", new { @class = "text-danger" })
+                @Html.EditorFor(tuple => tuple.Item1.ItemName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(tuple => tuple.Item1.ItemName, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.ItemName, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(tuple => tuple.Item1.ItemDescription, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ItemName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ItemName, "", new { @class = "text-danger" })
+                @Html.EditorFor(tuple => tuple.Item1.ItemDescription, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(tuple => tuple.Item1.ItemDescription, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.ItemDescription, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ItemDescription, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ItemDescription, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ItemImageURL, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(tuple => tuple.Item1.ItemImageURL, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @*@Html.EditorFor(model => model.ItemImageURL, new { htmlAttributes = new { @class = "form-control" } })*@
                 <input type="file" id="file" name="file" />
-                @Html.ValidationMessageFor(model => model.ItemImageURL, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(tuple => tuple.Item1.ItemImageURL, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.BidStartTime, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(tuple => tuple.Item1.BidStartTime, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.BidStartTime, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.BidStartTime, "", new { @class = "text-danger" })
+                @Html.EditorFor(tuple => tuple.Item1.BidStartTime, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(tuple => tuple.Item1.BidStartTime, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.BidEndTime, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(tuple => tuple.Item1.BidEndTime, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.BidEndTime, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.BidEndTime, "", new { @class = "text-danger" })
+                @Html.EditorFor(tuple => tuple.Item1.BidEndTime, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(tuple => tuple.Item1.BidEndTime, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.BidStartPrice, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(tuple => tuple.Item1.BidStartPrice, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.BidStartPrice, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.BidStartPrice, "", new { @class = "text-danger" })
+                @Html.EditorFor(tuple => tuple.Item1.BidStartPrice, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(tuple => tuple.Item1.BidStartPrice, "", new { @class = "text-danger" })
             </div>
         </div>
 
