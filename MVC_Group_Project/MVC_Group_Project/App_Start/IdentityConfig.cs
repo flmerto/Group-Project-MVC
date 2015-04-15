@@ -10,7 +10,7 @@ using System.Web;
 namespace MVC_Group_Project
 {
     // Configure the application user manager used in this application. UserManager is defined in ASP.NET Identity and is used by the application.
-    public class ApplicationUserManager : UserManager<ApplicationUser>
+    public class ApplicationUserManager : UserManager<User>
     {
         public ApplicationUserManager(IUserStore<User> store)
             : base(store)
