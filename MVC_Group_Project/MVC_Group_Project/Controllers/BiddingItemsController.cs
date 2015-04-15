@@ -34,13 +34,14 @@ namespace MVC_Group_Project.Controllers
             }
             return View(biddingItem);
         }
-
+     
         // GET: BiddingItems/Create
-   
         public ActionResult Create()
         {
-            return View(db.SubCategories.ToList());
-           
+            //List<SubCategory> subCategory = db.SubCategories.ToList();
+            //ViewBag.SubCategories = subCategory;
+            ViewBag.SubCategoryID = new SelectList(db.SubCategories, "SubCategoryID", "SubCategoryName");
+            return View();
         }
 
         // POST: BiddingItems/Create
@@ -48,7 +49,7 @@ namespace MVC_Group_Project.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "BiddingItemID,ItemName,ItemDescription,BidStartTime,BidEndTime,BidStartPrice")] BiddingItem biddingItem, HttpPostedFileBase file)
+        public ActionResult Create([Bind(Include = "BiddingItemID,ItemName,ItemDescription,BidStartTime,BidEndTime,BidStartPrice,SubCategoryID")] BiddingItem biddingItem, HttpPostedFileBase file)
         {
             if (ModelState.IsValid)
             {

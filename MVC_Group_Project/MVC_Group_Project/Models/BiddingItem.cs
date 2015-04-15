@@ -23,6 +23,8 @@ namespace MVC_Group_Project.Models
 
         [ForeignKey("SubCategoryID")]
         public SubCategory Sub { get; set; }
+
+        [DataType(DataType.Date)]
         [Required]
         public DateTime BidStartTime { get; set; }
         
@@ -45,5 +47,6 @@ namespace MVC_Group_Project.Models
         [DataType(DataType.Currency)]
         [Required]
         public decimal CurrentPrice { get; set; }
+
     }
 }

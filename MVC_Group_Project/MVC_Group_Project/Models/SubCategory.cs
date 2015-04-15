@@ -15,6 +15,5 @@ namespace MVC_Group_Project.Models
 
         [ForeignKey("CategoryID")]
         public Category cat { get; set; }
-
     }
 }
