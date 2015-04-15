@@ -163,6 +163,7 @@
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\CreditCardsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OnGoingBidsController.cs" />
     <Compile Include="Controllers\RolesAdminController.cs" />
     <Compile Include="Controllers\SubCategoriesController.cs" />
     <Compile Include="Controllers\UsersAdminController.cs" />
@@ -181,6 +182,7 @@
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\CreditCard.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\OnGoingBids.cs" />
     <Compile Include="Models\SubCategory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -269,6 +271,11 @@
     <Content Include="Views\BiddingItems\Details.cshtml" />
     <Content Include="Views\BiddingItems\Edit.cshtml" />
     <Content Include="Views\BiddingItems\Index.cshtml" />
+    <Content Include="Views\OnGoingBids\Create.cshtml" />
+    <Content Include="Views\OnGoingBids\Delete.cshtml" />
+    <Content Include="Views\OnGoingBids\Details.cshtml" />
+    <Content Include="Views\OnGoingBids\Edit.cshtml" />
+    <Content Include="Views\OnGoingBids\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
