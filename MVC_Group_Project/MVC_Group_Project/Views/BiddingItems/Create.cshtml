@@ -28,7 +28,7 @@
             </div>
         </div>
         <div class="form-group">
-            @Html.LabelFor(model => model.ItemName, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.ItemName, "Item", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.ItemName, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.ItemName, "", new { @class = "text-danger" })
@@ -36,7 +36,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.ItemDescription, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.ItemDescription, "Description", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.ItemDescription, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.ItemDescription, "", new { @class = "text-danger" })
@@ -44,7 +44,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.ItemImageURL, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.ItemImageURL, "Image", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @*@Html.EditorFor(model => model.ItemImageURL, new { htmlAttributes = new { @class = "form-control" } })*@
                 <input type="file" id="file" name="file" />
@@ -53,7 +53,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.BidStartTime, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.BidStartTime, "Bid Start", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.BidStartTime, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.BidStartTime, "", new { @class = "text-danger" })
@@ -61,7 +61,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.BidEndTime, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.BidEndTime, "Bid End", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.BidEndTime, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.BidEndTime, "", new { @class = "text-danger" })
@@ -69,7 +69,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.BidStartPrice, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.BidStartPrice, "Start Price", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.BidStartPrice, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.BidStartPrice, "", new { @class = "text-danger" })
@@ -85,7 +85,14 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @if (User.IsInRole("Member"))
+    {
+        @Html.ActionLink("Home", "Index", "Home")
+    }
+    else
+    {
+        @Html.ActionLink("Back to List", "Index")
+    }
 </div>
 
 @section Scripts {
