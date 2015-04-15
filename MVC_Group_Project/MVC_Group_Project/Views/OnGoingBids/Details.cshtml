@@ -1,0 +1,50 @@
+﻿@model MVC_Group_Project.Models.OnGoingBids
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>OnGoingBids</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ApplicationUser.Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ApplicationUser.Address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SelectedItem.ItemName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SelectedItem.ItemName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BidPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BidPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BidTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BidTime)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.OnGoingBidsID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -9,14 +9,14 @@ using System.Web.Mvc;
 using MVC_Group_Project.Models;
 using Microsoft.AspNet.Identity;
 using MVC_Group_Project.Filters;
-
+using Microsoft.AspNet.Identity.Owin; 
 
 namespace MVC_Group_Project.Controllers
 {
     [CustomAuthorization(Role = "Admin")] 
     public class CreditCardsController : Controller
-    {
-        private ApplicationDbContext db = new ApplicationDbContext();
+    {   
+        private ApplicationDbContext db = System.Web.HttpContext.Current.GetOwinContext().Get<ApplicationDbContext>();
 
         // GET: CreditCards
         public ActionResult Index()

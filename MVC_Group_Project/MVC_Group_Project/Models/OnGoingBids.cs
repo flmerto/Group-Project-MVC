@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNet.Identity.EntityFramework;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -8,18 +7,22 @@ using System.Web;
 
 namespace MVC_Group_Project.Models
 {
-    public class CreditCard
+    public class OnGoingBids
     {
-        public int CreditCardID { get; set; }
-        public string CardType { get; set; }
-        public string CardHolderName { get; set; }
-        public DateTime ExpiryDate { get; set; }
-        public int CSC { get; set; }
+        public int OnGoingBidsID { get; set; }
 
         [MaxLength(120), ForeignKey("User")]
         public virtual string UserId { get; set; }
 
         public virtual User User { get; set; }
 
+        public int BiddingItemID { get; set; }
+
+        [ForeignKey("BiddingItemID")]
+        public BiddingItem SelectedItem { get; set; }
+
+        public Decimal BidPrice { get; set; }
+
+        public DateTime BidTime { get; set; }
     }
 }

@@ -126,6 +126,22 @@ namespace MVC_Group_Project.Migrations
                 .Index(t => t.RoleId);
             
             CreateTable(
+                "dbo.OnGoingBids",
+                c => new
+                    {
+                        OnGoingBidsID = c.Int(nullable: false, identity: true),
+                        UserId = c.String(maxLength: 128),
+                        BiddingItemID = c.Int(nullable: false),
+                        BidPrice = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        BidTime = c.DateTime(nullable: false),
+                    })
+                .PrimaryKey(t => t.OnGoingBidsID)
+                .ForeignKey("dbo.BiddingItems", t => t.BiddingItemID, cascadeDelete: true)
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId)
+                .Index(t => t.UserId)
+                .Index(t => t.BiddingItemID);
+            
+            CreateTable(
                 "dbo.AspNetRoles",
                 c => new
                     {
@@ -140,6 +156,8 @@ namespace MVC_Group_Project.Migrations
         public override void Down()
         {
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
+            DropForeignKey("dbo.OnGoingBids", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.OnGoingBids", "BiddingItemID", "dbo.BiddingItems");
             DropForeignKey("dbo.CreditCards", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
@@ -147,6 +165,8 @@ namespace MVC_Group_Project.Migrations
             DropForeignKey("dbo.BiddingItems", "SubCategoryID", "dbo.SubCategories");
             DropForeignKey("dbo.SubCategories", "CategoryID", "dbo.Categories");
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
+            DropIndex("dbo.OnGoingBids", new[] { "BiddingItemID" });
+            DropIndex("dbo.OnGoingBids", new[] { "UserId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
@@ -156,6 +176,7 @@ namespace MVC_Group_Project.Migrations
             DropIndex("dbo.SubCategories", new[] { "CategoryID" });
             DropIndex("dbo.BiddingItems", new[] { "SubCategoryID" });
             DropTable("dbo.AspNetRoles");
+            DropTable("dbo.OnGoingBids");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");

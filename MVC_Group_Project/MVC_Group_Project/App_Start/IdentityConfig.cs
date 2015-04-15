@@ -12,16 +12,16 @@ namespace MVC_Group_Project
     // Configure the application user manager used in this application. UserManager is defined in ASP.NET Identity and is used by the application.
     public class ApplicationUserManager : UserManager<ApplicationUser>
     {
-        public ApplicationUserManager(IUserStore<ApplicationUser> store)
+        public ApplicationUserManager(IUserStore<User> store)
             : base(store)
         {
         }
 
         public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context)
         {
-            var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(context.Get<ApplicationDbContext>()));
+            var manager = new ApplicationUserManager(new UserStore<User>(context.Get<ApplicationDbContext>()));
             // Configure validation logic for usernames
-            manager.UserValidator = new UserValidator<ApplicationUser>(manager)
+            manager.UserValidator = new UserValidator<User>(manager)
             {
                 AllowOnlyAlphanumericUserNames = false,
                 RequireUniqueEmail = true
@@ -38,7 +38,7 @@ namespace MVC_Group_Project
             var dataProtectionProvider = options.DataProtectionProvider;
             if (dataProtectionProvider != null)
             {
-                manager.UserTokenProvider = new DataProtectorTokenProvider<ApplicationUser>(dataProtectionProvider.Create("ASP.NET Identity"));
+                manager.UserTokenProvider = new DataProtectorTokenProvider<User>(dataProtectionProvider.Create("ASP.NET Identity"));
             }
             return manager;
         }
@@ -100,17 +100,19 @@ namespace MVC_Group_Project
         private static void CreateUserAndRole(string firstname, string lastname, string address, string email, string password, string roleName, ApplicationUserManager userManager, ApplicationRoleManager roleManager)
         {
             //Create Role if it does not exist
-            var role = roleManager.FindByName(roleName);
+
+            IdentityRole role = null;
+            //var role = roleManager.FindByName(roleName);
             if (role == null)
             {
                 role = new IdentityRole(roleName);
                 var roleresult = roleManager.Create(role);
             }
-
-            var user = userManager.FindByName(email);
+            User user = null;
+            //var user = userManager.FindByName(email);
             if (user == null)
             {
-                user = new ApplicationUser { UserName = email, Email = email };
+                user = new User { UserName = email, Email = email };
                 var result = userManager.Create(user, password);
                 result = userManager.SetLockoutEnabled(user.Id, false);
             }
