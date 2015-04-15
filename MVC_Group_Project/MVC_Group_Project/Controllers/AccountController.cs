@@ -118,9 +118,6 @@ namespace MVC_Group_Project.Controllers
 
                 if (result.Succeeded)
                 {
-                    
-                    await SignInAsync(user, isPersistent: false);
-
                     var role = RoleManager.FindByName("Member");
                     UserManager.AddToRole(user.Id, role.Name);
 
@@ -129,6 +126,8 @@ namespace MVC_Group_Project.Controllers
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+                    await SignInAsync(user, isPersistent: false);
 
                     return RedirectToAction("Index", "Home");
                 }
