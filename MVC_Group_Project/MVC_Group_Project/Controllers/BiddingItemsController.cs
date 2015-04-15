@@ -7,12 +7,13 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MVC_Group_Project.Models;
+using Microsoft.AspNet.Identity.Owin; 
 
 namespace MVC_Group_Project.Controllers
 {
     public class BiddingItemsController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private ApplicationDbContext db = System.Web.HttpContext.Current.GetOwinContext().Get<ApplicationDbContext>();
 
         // GET: BiddingItems
         public ActionResult Index()

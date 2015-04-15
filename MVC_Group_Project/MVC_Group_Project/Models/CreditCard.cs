@@ -16,10 +16,10 @@ namespace MVC_Group_Project.Models
         public DateTime ExpiryDate { get; set; }
         public int CSC { get; set; }
 
-        [MaxLength(120), ForeignKey("ApplicationUser")]
+        [MaxLength(120), ForeignKey("User")]
         public virtual string UserId { get; set; }
 
-        public virtual ApplicationUser ApplicationUser { get; set; }
+        public virtual User User { get; set; }
 
     }
 }

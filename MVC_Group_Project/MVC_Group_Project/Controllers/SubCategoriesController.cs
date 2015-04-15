@@ -8,13 +8,14 @@ using System.Web;
 using System.Web.Mvc;
 using MVC_Group_Project.Models;
 using MVC_Group_Project.Filters;
+using Microsoft.AspNet.Identity.Owin; 
 
 namespace MVC_Group_Project.Controllers
 {
     [CustomAuthorization(Role = "Admin")] 
     public class SubCategoriesController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private ApplicationDbContext db = System.Web.HttpContext.Current.GetOwinContext().Get<ApplicationDbContext>();
 
         // GET: SubCategories
         public ActionResult Index()

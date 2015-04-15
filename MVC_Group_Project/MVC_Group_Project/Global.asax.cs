@@ -20,7 +20,7 @@ namespace MVC_Group_Project
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             // This will update the database whenever the model changed when the application start, so no need to drop the database.
-            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<ApplicationDbContext>());
+            //Database.SetInitializer(new DropCreateDatabaseIfModelChanges<ApplicationDbContext>());
         }
     }
 }

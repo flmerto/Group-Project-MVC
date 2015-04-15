@@ -7,17 +7,19 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MVC_Group_Project.Models;
+using Microsoft.AspNet.Identity.Owin; 
 
 namespace MVC_Group_Project.Controllers
 {
     public class OnGoingBidsController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private ApplicationDbContext db = System.Web.HttpContext.Current.GetOwinContext().Get<ApplicationDbContext>();
+
 
         // GET: OnGoingBids
         public ActionResult Index()
         {
-            var onGoingBids = db.OnGoingBids.Include(o => o.ApplicationUser).Include(o => o.SelectedItem);
+            var onGoingBids = db.OnGoingBids.Include(o => o.User).Include(o => o.SelectedItem);
             return View(onGoingBids.ToList());
         }
 
@@ -39,7 +41,7 @@ namespace MVC_Group_Project.Controllers
         // GET: OnGoingBids/Create
         public ActionResult Create()
         {
-            ViewBag.UserId = new SelectList(db.ApplicationUsers, "Id", "Address");
+            ViewBag.UserId = new SelectList(db.Users, "Id", "Address");
             ViewBag.BiddingItemID = new SelectList(db.BiddingItems, "BiddingItemID", "ItemName");
             return View();
         }
@@ -58,7 +60,7 @@ namespace MVC_Group_Project.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.UserId = new SelectList(db.ApplicationUsers, "Id", "Address", onGoingBids.UserId);
+            ViewBag.UserId = new SelectList(db.Users, "Id", "Address", onGoingBids.UserId);
             ViewBag.BiddingItemID = new SelectList(db.BiddingItems, "BiddingItemID", "ItemName", onGoingBids.BiddingItemID);
             return View(onGoingBids);
         }
@@ -75,7 +77,7 @@ namespace MVC_Group_Project.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.UserId = new SelectList(db.ApplicationUsers, "Id", "Address", onGoingBids.UserId);
+            ViewBag.UserId = new SelectList(db.Users, "Id", "Address", onGoingBids.UserId);
             ViewBag.BiddingItemID = new SelectList(db.BiddingItems, "BiddingItemID", "ItemName", onGoingBids.BiddingItemID);
             return View(onGoingBids);
         }
@@ -93,7 +95,7 @@ namespace MVC_Group_Project.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.UserId = new SelectList(db.ApplicationUsers, "Id", "Address", onGoingBids.UserId);
+            ViewBag.UserId = new SelectList(db.Users, "Id", "Address", onGoingBids.UserId);
             ViewBag.BiddingItemID = new SelectList(db.BiddingItems, "BiddingItemID", "ItemName", onGoingBids.BiddingItemID);
             return View(onGoingBids);
         }
