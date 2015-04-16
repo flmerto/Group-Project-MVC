@@ -43,7 +43,7 @@
 
                         </dt>
                     </dl>
-                    <div class="btn btn-warning" @Html.ActionLink("Bid Now!", "Create", "BiddingItems")><span class="glyphicon glyphicon-ok"></span></div>
+                    <div>@Html.ActionLink("Bid Now!","BiddingPage","OnGoingBids",new { id = item.BiddingItemID},null)</div> 
                 </div>
             </div>
         </div>

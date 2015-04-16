@@ -25,22 +25,38 @@ namespace MVC_Group_Project.Controllers
 
         // GET: OnGoingBids/Details/5
         public ActionResult Details(int? id)
+       {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var Bid = db.BiddingItems.Include(bidI => bidI.Sub).Where(bidI => bidI.BiddingItemID == (int)id);
+            //var Bid = db.BiddingItems.Find(id);
+            if (Bid == null)
+            {
+                return HttpNotFound();
+            }
+            return View(Bid.FirstOrDefault());
+        }
+        public ActionResult BiddingPage(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            OnGoingBids onGoingBids = db.OnGoingBids.Find(id);
-            if (onGoingBids == null)
+            var Bid = db.BiddingItems.Include(bidI => bidI.Sub).Where(bidI => bidI.BiddingItemID == (int)id);
+            //var Bid = db.BiddingItems.Find(id);
+            if (Bid == null)
             {
                 return HttpNotFound();
             }
-            return View(onGoingBids);
+            return View(Bid.FirstOrDefault());
         }
 
         // GET: OnGoingBids/Create
         public ActionResult Create()
         {
+
             ViewBag.UserId = new SelectList(db.Users, "Id", "Address");
             ViewBag.BiddingItemID = new SelectList(db.BiddingItems, "BiddingItemID", "ItemName");
             return View();

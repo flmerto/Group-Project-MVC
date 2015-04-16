@@ -278,6 +278,7 @@
     <Content Include="Views\BiddingItems\Details.cshtml" />
     <Content Include="Views\BiddingItems\Edit.cshtml" />
     <Content Include="Views\BiddingItems\Index.cshtml" />
+    <Content Include="Views\OnGoingBids\BiddingPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

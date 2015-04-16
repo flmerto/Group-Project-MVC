@@ -1,0 +1,90 @@
+﻿@model MVC_Group_Project.Models.BiddingItem
+
+@{
+    ViewBag.Title = "BiddingPage";
+}
+
+<h2>BiddingPage</h2>
+
+<div>
+    <h4>BiddingItem</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Sub.SubCategoryName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sub.SubCategoryName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User.Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.Address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ItemName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ItemName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ItemDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ItemDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ItemImageURL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ItemImageURL)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BidStartTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BidStartTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BidEndTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BidEndTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BidStartPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BidStartPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HighestBidPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HighestBidPrice)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.BiddingItemID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

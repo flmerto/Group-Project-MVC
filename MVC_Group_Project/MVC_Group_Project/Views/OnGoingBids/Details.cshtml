@@ -4,47 +4,49 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>Item Information</h2>
 
-<div>
-    <h4>OnGoingBids</h4>
+<div class="form-horizontal">
+    <h4>Update Bid:</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.ApplicationUser.Address)
+            @Html.DisplayName("Item Name")
         </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ApplicationUser.Address)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.SelectedItem.ItemName)
-        </dt>
-
         <dd>
             @Html.DisplayFor(model => model.SelectedItem.ItemName)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.BidPrice)
+            @Html.DisplayName("Item Description")
         </dt>
-
         <dd>
-            @Html.DisplayFor(model => model.BidPrice)
+            @Html.DisplayFor(model => model.SelectedItem.ItemDescription)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.BidTime)
+            @Html.DisplayName("Image")
         </dt>
-
         <dd>
-            @Html.DisplayFor(model => model.BidTime)
+            @Html.DisplayFor(model => model.SelectedItem.ItemImageURL)
         </dd>
 
+        <dt>
+            @Html.DisplayName("Bid Original Price")
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SelectedItem.BidStartPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Current Bid")
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SelectedItem.HighestBidPrice)
+        </dd>
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.OnGoingBidsID }) |
-    @Html.ActionLink("Back to List", "Index")
+    @*@Html.ActionLink("Edit", "Edit", new { id = Model.OnGoingBidsID }) |
+    @Html.ActionLink("Back to List", "Index")*@
 </p>
