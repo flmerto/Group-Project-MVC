@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MVC_Group_Project.Filters;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -24,11 +25,15 @@ namespace MVC_Group_Project.Models
         public SubCategory Sub { get; set; }
 
         [DataType(DataType.Date)]
-        [Required]
+        [CurrentDateAttibute]
+        [Required(ErrorMessage="Date field mandatory!")]
+     
         public DateTime BidStartTime { get; set; }
         
         [DataType(DataType.Date)]
-        [Required]
+        [CurrentDateAttibute]
+        [Required(ErrorMessage = "Date field mandatory!")]
+     
         public DateTime BidEndTime { get; set; }
 
         [DataType(DataType.Date)]
