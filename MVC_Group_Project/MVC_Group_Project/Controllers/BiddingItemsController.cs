@@ -7,7 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MVC_Group_Project.Models;
-using Microsoft.AspNet.Identity.Owin; 
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.AspNet.Identity;
 
 namespace MVC_Group_Project.Controllers
 {
@@ -18,7 +19,8 @@ namespace MVC_Group_Project.Controllers
         // GET: BiddingItems
         public ActionResult Index()
         {
-            return View(db.BiddingItems.ToList());
+            var biddingItems = db.BiddingItems.Include(b => b.Sub).Include(b => b.User);
+            return View(biddingItems.ToList());
         }
 
         // GET: BiddingItems/Details/5
@@ -28,20 +30,20 @@ namespace MVC_Group_Project.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            BiddingItem biddingItem = db.BiddingItems.Find(id);
-            if (biddingItem == null)
+            var bidItem = db.BiddingItems.Include(bidI => bidI.Sub).Where(bidI => bidI.BiddingItemID == (int)id);
+            //BiddingItem biddingItem = db.BiddingItems.Find(id);
+            if (bidItem == null)
             {
                 return HttpNotFound();
             }
-            return View(biddingItem);
+            return View(bidItem.FirstOrDefault());
         }
-     
+
         // GET: BiddingItems/Create
         public ActionResult Create()
         {
-            //List<SubCategory> subCategory = db.SubCategories.ToList();
-            //ViewBag.SubCategories = subCategory;
             ViewBag.SubCategoryID = new SelectList(db.SubCategories, "SubCategoryID", "SubCategoryName");
+            //ViewBag.UserId = new SelectList(db.Users, "Id", "Address");
             return View();
         }
 
@@ -54,6 +56,9 @@ namespace MVC_Group_Project.Controllers
         {
             if (ModelState.IsValid)
             {
+                var userID = User.Identity.GetUserId();
+                biddingItem.UserId = userID;
+
                 string imagePath = Server.MapPath("~/Images/" + file.FileName);
                 file.SaveAs(imagePath);
 
@@ -67,6 +72,7 @@ namespace MVC_Group_Project.Controllers
             return View(biddingItem);
         }
 
+
         // GET: BiddingItems/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -79,6 +85,8 @@ namespace MVC_Group_Project.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.SubCategoryID = new SelectList(db.SubCategories, "SubCategoryID", "SubCategoryName", biddingItem.SubCategoryID);
+            ViewBag.UserId = new SelectList(db.Users, "Id", "Address", biddingItem.UserId);
             return View(biddingItem);
         }
 
@@ -87,14 +95,24 @@ namespace MVC_Group_Project.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "BiddingItemID,ItemName,ItemDescription,ItemImageURL,BidStartTime,BidEndTime,BidStartPrice,CurrentPrice")] BiddingItem biddingItem)
+        public ActionResult Edit([Bind(Include = "BiddingItemID,ItemName,ItemDescription,ItemImageURL,SubCategoryID,BidStartTime,BidEndTime,BidStartPrice,CurrentPrice,UserId")] BiddingItem biddingItem, HttpPostedFileBase file)
         {
             if (ModelState.IsValid)
             {
+                string imagePath = Server.MapPath("~/Images/" + file.FileName);
+                file.SaveAs(imagePath);
+
+                biddingItem.ItemImageURL = "Images/" + file.FileName;
+
+                db.BiddingItems.Add(biddingItem);
+                db.SaveChanges();
+
                 db.Entry(biddingItem).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.SubCategoryID = new SelectList(db.SubCategories, "SubCategoryID", "SubCategoryName", biddingItem.SubCategoryID);
+            ViewBag.UserId = new SelectList(db.Users, "Id", "Address", biddingItem.UserId);
             return View(biddingItem);
         }
 

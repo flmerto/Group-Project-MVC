@@ -19,11 +19,14 @@ namespace MVC_Group_Project.Migrations
                         BidStartTime = c.DateTime(nullable: false),
                         BidEndTime = c.DateTime(nullable: false),
                         BidStartPrice = c.Decimal(nullable: false, precision: 18, scale: 2),
-                        CurrentPrice = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        HighestBidPrice = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        UserId = c.String(maxLength: 128),
                     })
                 .PrimaryKey(t => t.BiddingItemID)
                 .ForeignKey("dbo.SubCategories", t => t.SubCategoryID, cascadeDelete: true)
-                .Index(t => t.SubCategoryID);
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId)
+                .Index(t => t.SubCategoryID)
+                .Index(t => t.UserId);
             
             CreateTable(
                 "dbo.SubCategories",
@@ -47,21 +50,6 @@ namespace MVC_Group_Project.Migrations
                         CategoryName = c.String(),
                     })
                 .PrimaryKey(t => t.CategoryID);
-            
-            CreateTable(
-                "dbo.CreditCards",
-                c => new
-                    {
-                        CreditCardID = c.Int(nullable: false, identity: true),
-                        CardType = c.String(),
-                        CardHolderName = c.String(),
-                        ExpiryDate = c.DateTime(nullable: false),
-                        CSC = c.Int(nullable: false),
-                        UserId = c.String(maxLength: 128),
-                    })
-                .PrimaryKey(t => t.CreditCardID)
-                .ForeignKey("dbo.AspNetUsers", t => t.UserId)
-                .Index(t => t.UserId);
             
             CreateTable(
                 "dbo.AspNetUsers",
@@ -126,6 +114,21 @@ namespace MVC_Group_Project.Migrations
                 .Index(t => t.RoleId);
             
             CreateTable(
+                "dbo.CreditCards",
+                c => new
+                    {
+                        CreditCardID = c.Int(nullable: false, identity: true),
+                        CardType = c.String(),
+                        CardHolderName = c.String(),
+                        ExpiryDate = c.DateTime(nullable: false),
+                        CSC = c.Int(nullable: false),
+                        UserId = c.String(maxLength: 128),
+                    })
+                .PrimaryKey(t => t.CreditCardID)
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId)
+                .Index(t => t.UserId);
+            
+            CreateTable(
                 "dbo.OnGoingBids",
                 c => new
                     {
@@ -159,6 +162,7 @@ namespace MVC_Group_Project.Migrations
             DropForeignKey("dbo.OnGoingBids", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.OnGoingBids", "BiddingItemID", "dbo.BiddingItems");
             DropForeignKey("dbo.CreditCards", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.BiddingItems", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
@@ -167,21 +171,22 @@ namespace MVC_Group_Project.Migrations
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
             DropIndex("dbo.OnGoingBids", new[] { "BiddingItemID" });
             DropIndex("dbo.OnGoingBids", new[] { "UserId" });
+            DropIndex("dbo.CreditCards", new[] { "UserId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
-            DropIndex("dbo.CreditCards", new[] { "UserId" });
             DropIndex("dbo.SubCategories", new[] { "CategoryID" });
+            DropIndex("dbo.BiddingItems", new[] { "UserId" });
             DropIndex("dbo.BiddingItems", new[] { "SubCategoryID" });
             DropTable("dbo.AspNetRoles");
             DropTable("dbo.OnGoingBids");
+            DropTable("dbo.CreditCards");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
-            DropTable("dbo.CreditCards");
             DropTable("dbo.Categories");
             DropTable("dbo.SubCategories");
             DropTable("dbo.BiddingItems");

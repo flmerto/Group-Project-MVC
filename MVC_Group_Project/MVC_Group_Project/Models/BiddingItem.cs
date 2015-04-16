@@ -10,7 +10,6 @@ namespace MVC_Group_Project.Models
 {
     public class BiddingItem
     {
-        
         public int BiddingItemID { get; set; }
         [Required]
         public string ItemName { get; set; }
@@ -44,9 +43,14 @@ namespace MVC_Group_Project.Models
         [DataType(DataType.Currency)]
         [Required]
         public decimal BidStartPrice { get; set; }
+
         [DataType(DataType.Currency)]
-        [Required]
-        public decimal CurrentPrice { get; set; }
+        public decimal HighestBidPrice { get; set; }
+
+        [MaxLength(120), ForeignKey("User")]
+        public virtual string UserId { get; set; }
+
+        public virtual User User { get; set; }
 
     }
 }
