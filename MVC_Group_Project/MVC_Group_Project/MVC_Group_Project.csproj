@@ -168,7 +168,7 @@
     <Compile Include="Controllers\SubCategoriesController.cs" />
     <Compile Include="Controllers\UsersAdminController.cs" />
     <Compile Include="Filters\CustomAuthorization.cs" />
-    <Compile Include="Filters\CustomDateValidator.cs" />
+    <Compile Include="Filters\CurrentDateAttibute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

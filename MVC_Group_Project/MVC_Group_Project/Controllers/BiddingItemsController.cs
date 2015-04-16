@@ -68,6 +68,10 @@ namespace MVC_Group_Project.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            else
+            {
+                ViewBag.SubCategoryID = new SelectList(db.SubCategories, "SubCategoryID", "SubCategoryName");
+            }
 
             return View(biddingItem);
         }
