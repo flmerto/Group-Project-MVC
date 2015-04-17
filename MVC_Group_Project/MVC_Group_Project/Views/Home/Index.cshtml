@@ -18,7 +18,7 @@
 <div style="align-self:center">
     @foreach (var item in Model)
     {
-        <div class="col-sm-3" style="">
+        <div class="col-sm-3">
             <div class="panel panel-primary" style="text-align:center">
                 <div class="panel-heading">
                     <h3 class="panel-title">@Html.DisplayFor(modelItem => item.ItemName)</h3>
@@ -43,7 +43,7 @@
 
                         </dt>
                     </dl>
-                    <div>@Html.ActionLink("Bid Now!","BiddingPage","OnGoingBids",new { id = item.BiddingItemID},null)</div> 
+                    <div class="btn btn-warning">@Html.ActionLink("Bid Now!","BiddingPage","OnGoingBids",new { id = item.BiddingItemID},null)</div> 
                 </div>
             </div>
         </div>
