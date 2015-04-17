@@ -11,6 +11,7 @@ using Microsoft.AspNet.Identity.Owin;
 
 namespace MVC_Group_Project.Controllers
 {
+    [Authorize]
     public class OnGoingBidsController : Controller
     {
         private ApplicationDbContext db = System.Web.HttpContext.Current.GetOwinContext().Get<ApplicationDbContext>();

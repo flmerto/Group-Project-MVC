@@ -12,6 +12,7 @@ using Microsoft.AspNet.Identity;
 
 namespace MVC_Group_Project.Controllers
 {
+    [Authorize]
     public class BiddingItemsController : Controller
     {
         private ApplicationDbContext db = System.Web.HttpContext.Current.GetOwinContext().Get<ApplicationDbContext>();
