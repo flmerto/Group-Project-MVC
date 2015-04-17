@@ -4,6 +4,30 @@
     ViewBag.Title = "Home Page";
 }
 
+@section Scripts {
+    @Scripts.Render("~/Scripts/contentHover.js")
+
+    <script type="text/javascript">
+        function AddHoverEffectOnItemByID(element) {
+            $('.' + element).contenthover({
+                overlay_width: 200,
+                overlay_height: 110,
+                effect: 'slide',
+                slide_direction: 'right',
+                overlay_x_position: 'right',
+                overlay_y_position: 'center',
+                overlay_background: '#000',
+                overlay_opacity: 0.8
+            });
+        }
+
+        $(document).ready(function () {
+            AddHoverEffectOnItemByID("MyAwesomeHoverAbilities");
+        })
+    </script>
+}
+
+
 <div class="jumbotron">
     <div style="text-align:center">
         <img height="200" width="600" src="~/Images/bidding3.jpg" />
@@ -25,25 +49,24 @@
                 </div>
                 <div class="panel-body" style="text-align:center">
 
-                    <img src="../../@Html.DisplayFor(model => item.ItemImageURL)" style="height:150px; width:200px" class="img-responsive" alt="Responsive image" />
-                    <dl>
+                    <img class="MyAwesomeHoverAbilities" src="../../@Html.DisplayFor(model => item.ItemImageURL)" style="height:150px; width:200px" class="img-responsive" alt="Responsive image" />
+                   
+                    <div class="contenthover">
 
-                        @*@Html.DisplayFor(modelItem => item.BidStartTime)
-                            @Html.DisplayFor(modelItem => item.BidEndTime)
-                            @Html.DisplayFor(modelItem => item.CurrentPrice)
-                        *@
-                        <dt>
-                            @Html.DisplayFor(modelItem => item.ItemDescription)
-                        </dt>
-                        <dt>
-                            @Html.DisplayFor(modelItem => item.BidEndTime)
-                        </dt>
-                        <dt>
-                            @Html.DisplayFor(modelItem => item.BidStartPrice)
+                        <dl>
+                            <dt>
+                                @Html.DisplayFor(modelItem => item.ItemDescription)
+                            </dt>
+                            <dt>
+                                @Html.DisplayFor(modelItem => item.BidEndTime)
+                            </dt>
+                            <dt>
+                                @Html.DisplayFor(modelItem => item.BidStartPrice)
 
-                        </dt>
-                    </dl>
-                    <div class="btn btn-warning">@Html.ActionLink("Bid Now!","BiddingPage","OnGoingBids",new { id = item.BiddingItemID},null)</div> 
+                            </dt>
+                        </dl>
+                        <div class="btn btn-warning">@Html.ActionLink("Bid Now!", "BiddingPage", "OnGoingBids", new { id = item.BiddingItemID }, null)</div>
+                    </div>
                 </div>
             </div>
         </div>
