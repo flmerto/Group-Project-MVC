@@ -20,8 +20,8 @@ namespace MVC_Group_Project.Controllers
         // GET: BiddingItems
         public ActionResult Index()
         {
-            var biddingItems = db.BiddingItems.Include(b => b.Sub).Include(b => b.User);
-            return View(biddingItems.ToList());
+            var listofItems = db.BiddingItems.Include(i => i.Sub);
+            return View(listofItems.ToList());
         }
 
         // GET: BiddingItems/Details/5
@@ -57,17 +57,35 @@ namespace MVC_Group_Project.Controllers
         {
             if (ModelState.IsValid)
             {
-                var userID = User.Identity.GetUserId();
-                biddingItem.UserId = userID;
+                if (file == null)
+                {
+                    ViewData["Success"] = "false";
+                    ViewBag.SubCategoryID = new SelectList(db.SubCategories, "SubCategoryID", "SubCategoryName");
+                }
+                else
+                {
+                    var userID = User.Identity.GetUserId();
+                    biddingItem.UserId = userID;
 
-                string imagePath = Server.MapPath("~/Images/" + file.FileName);
-                file.SaveAs(imagePath);
+                    string imagePath = Server.MapPath("~/Images/" + file.FileName);
+                    file.SaveAs(imagePath);
 
-                biddingItem.ItemImageURL = "Images/" + file.FileName;
+                    biddingItem.ItemImageURL = "Images/" + file.FileName;
 
-                db.BiddingItems.Add(biddingItem);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                    db.BiddingItems.Add(biddingItem);
+                    db.SaveChanges();
+
+                    ViewData["Success"] = "true";
+                    
+                    if (User.IsInRole("Admin"))
+                    {
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        return Redirect("~/Home/Index");
+                    }
+                }
             }
             else
             {
@@ -104,6 +122,7 @@ namespace MVC_Group_Project.Controllers
         {
             if (ModelState.IsValid)
             {
+                
                 string imagePath = Server.MapPath("~/Images/" + file.FileName);
                 file.SaveAs(imagePath);
 

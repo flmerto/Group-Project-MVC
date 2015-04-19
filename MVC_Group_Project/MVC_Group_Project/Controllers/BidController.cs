@@ -48,7 +48,8 @@ namespace MVC_Group_Project.Controllers
 
                 try
                 {
-                    if (db.OnGoingBids.Count() == 0)
+                    var s = db.OnGoingBids.Where(o => o.BiddingItemID == id).OrderByDescending(p => p.OnGoingBidsID);
+                    if (db.OnGoingBids.Count() == 0 || s.Count() == 0)
                     {
                         if (bid.onGB.BidPrice > db.BiddingItems.Single(a => a.BiddingItemID == id).BidStartPrice)
                         {
