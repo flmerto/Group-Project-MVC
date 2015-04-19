@@ -42,9 +42,8 @@ namespace MVC_Group_Project.Controllers
         {
             if (bid != null)
             {
+
                 var userID = User.Identity.GetUserId();
-                var totalbidders = db.OnGoingBids.Where(x => x.BiddingItemID == id).Count();
-                bid.TotalBidders = totalbidders;
 
                 try
                 {
@@ -96,8 +95,10 @@ namespace MVC_Group_Project.Controllers
                         }
                     }
 
-                    bid.bItem = db.BiddingItems.Single(item => item.BiddingItemID == id);
+                    var totalbidders = db.OnGoingBids.Where(x => x.BiddingItemID == id).Count();
+                    bid.TotalBidders = totalbidders;
 
+                    bid.bItem = db.BiddingItems.Single(item => item.BiddingItemID == id);
                 }
                 catch (DbEntityValidationException dbEx)
                 {

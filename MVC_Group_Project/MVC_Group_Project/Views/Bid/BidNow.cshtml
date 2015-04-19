@@ -68,29 +68,26 @@
                                     @Html.DisplayFor(model => model.bItem.HighestBidPrice)
                                 </dt>
                             </dl>
-                            
-                            @if (ViewData["Approved"] != null)
-                            {
-                                <br />
-                                <div>Successfully bid to this item!</div>
-                                ViewData["Approved"] = null;
-                            }
-                            else
-                            {
-                               <div></div>
-                            }
-
-                            @if (ViewData["LowerBid"] != null)
-                            {
-                                <br />
-                                <div>Please put an amount higher than the current bid!</div>
-                                ViewData["LowerBid"] = null;
-                            }
-                            else
-                            {
-                             <div></div>       
-                            }
                         </div>
+                        @if (ViewData["Approved"] != null)
+                        {
+                            <div style="color:darkblue; padding-left:15px">You have successfully bid to this item!</div>
+                            ViewData["Approved"] = null;
+                        }
+                        else
+                        {
+                            <div></div>
+                        }
+
+                        @if (ViewData["LowerBid"] != null)
+                        {
+                            <div style="color:red; padding-left:15px">Please put an amount higher than the current bid!</div>
+                            ViewData["LowerBid"] = null;
+                        }
+                        else
+                        {
+                            <div></div>
+                        }
                     </form>
                 </div>
             </div>
