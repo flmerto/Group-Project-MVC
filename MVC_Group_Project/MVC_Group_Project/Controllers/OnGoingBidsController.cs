@@ -7,7 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MVC_Group_Project.Models;
-using Microsoft.AspNet.Identity.Owin; 
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.AspNet.Identity;
 
 namespace MVC_Group_Project.Controllers
 {
@@ -27,20 +28,6 @@ namespace MVC_Group_Project.Controllers
         // GET: OnGoingBids/Details/5
         public ActionResult Details(int? id)
        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            var Bid = db.BiddingItems.Include(bidI => bidI.Sub).Where(bidI => bidI.BiddingItemID == (int)id);
-            //var Bid = db.BiddingItems.Find(id);
-            if (Bid == null)
-            {
-                return HttpNotFound();
-            }
-            return View(Bid.FirstOrDefault());
-        }
-        public ActionResult BiddingPage(int? id)
-        {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

@@ -1,0 +1,103 @@
+﻿@model MVC_Group_Project.Models.ModelsForBiddingPage
+
+@{
+    ViewBag.Title = "BiddingPage";
+}
+
+<h2>Bid Now!</h2>
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+
+<hr />
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="col-md-4" style="align-content:center">
+            <img src="../../@Html.DisplayFor(model => model.bItem.ItemImageURL)" class="img-responsive" alt="Responsive image" />
+        </div>
+        <div class="col-sm-5">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">@Html.DisplayFor(model => model.bItem.ItemName)</h3>
+                </div>
+                <div class="panel-body">
+                    <form class="form-inline">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-addon">$</div>
+                                @*<input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount">*@
+                                @Html.EditorFor(model => model.onGB.BidPrice, new { htmlAttributes = new { @class = "form-control" } })
+                                @*<div class="input-group-addon">.00</div>*@
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <br />
+                            <dl>
+                                <dd>
+                                    Number of Bidders:
+                                </dd>
+                                <dd>
+                                    Time Left:
+                                </dd>
+                                <dd>
+                                    Start Bid:
+                                </dd>
+                                <dd>
+                                    Highest Bid:
+                                </dd>
+                            </dl>
+                        </div>
+                        <div class="col-md-6">
+                            <br />
+                            <dl>
+                                <dt>
+                                    <a href="~/Home/Index" style="">[@Html.DisplayFor(model => model.TotalBidders)]</a>
+                                </dt>
+                                <dt>
+                                    @Html.DisplayFor(model => model.bItem.BidEndTime)
+                                </dt>
+                                <dt>
+                                    @Html.DisplayFor(model => model.bItem.BidStartPrice)
+                                </dt>
+                                <dt>
+                                    @Html.DisplayFor(model => model.bItem.HighestBidPrice)
+                                </dt>
+                            </dl>
+                            <div>
+                                <button type="submit" class="btn btn-danger">Place Bid</button>
+                            </div>
+                            @if (ViewData["Approved"] != null)
+                            {
+                                <br />
+                                <div>Successfully bid to this item!</div>
+                                ViewData["Approved"] = null;
+                            }
+                            else
+                            {
+                               <div></div>
+                            }
+
+                            @if (ViewData["LowerBid"] != null)
+                            {
+                                <br />
+                                <div>Please put an amount higher than the current bid!</div>
+                                ViewData["LowerBid"] = null;
+                            }
+                            else
+                            {
+                             <div></div>       
+                            }
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+}
+<hr />
+
+
+
+

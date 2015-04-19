@@ -159,6 +159,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BidController.cs" />
     <Compile Include="Controllers\BiddingItemsController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\CreditCardsController.cs" />
@@ -183,6 +184,7 @@
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\CreditCard.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\ModelsForBiddingPage.cs" />
     <Compile Include="Models\OnGoingBids.cs" />
     <Compile Include="Models\SubCategory.cs" />
     <Compile Include="Models\Transactions.cs" />
@@ -279,7 +281,7 @@
     <Content Include="Views\BiddingItems\Details.cshtml" />
     <Content Include="Views\BiddingItems\Edit.cshtml" />
     <Content Include="Views\BiddingItems\Index.cshtml" />
-    <Content Include="Views\OnGoingBids\BiddingPage.cshtml" />
+    <Content Include="Views\Bid\BidNow.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
