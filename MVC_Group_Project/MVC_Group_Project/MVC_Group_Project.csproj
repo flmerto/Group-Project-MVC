@@ -196,7 +196,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Images\bidding3.jpg" />
+    <Content Include="Images\bidimage2.jpg" />
+    <Content Include="Images\bidimage3.jpg" />
+    <Content Include="Images\bidimage4.JPG" />
     <Content Include="Images\classpic.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

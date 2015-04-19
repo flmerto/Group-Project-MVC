@@ -26,9 +26,45 @@
         })
     </script>
 }
-
-
+<hr />
 <div class="jumbotron">
+        <div class="container">
+        <div id="myCarousel" class="carousel slide">
+            <ol class="carousel-indicators">
+                <li data-target="#myCarousel" data-slide-to="0" class="active" style="background-color:powderblue"></li>
+                <li data-target="#myCarousel" data-slide-to="1" style="background-color:powderblue"></li>
+                <li data-target="#myCarousel" data-slide-to="2" style="background-color:powderblue"></li>
+            </ol>
+            <div style="align-content:center">
+                <div class="carousel-inner">
+                    <div class="item active">
+                        <img src="~/Images/bidimage2.jpg" />
+                    </div>
+
+                    <div class="item">
+                        <img src="~/Images/bidimage3.jpg" />
+                    </div>
+
+                    <div class="item">
+                        <img src="~/Images/bidimage4.jpg" />
+                    </div>
+                </div>
+            </div>
+            <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+            </a>
+
+            <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+            </a>
+
+        </div>
+    </div>
+</div>
+<h4>Live Bidding</h4>
+<hr /> 
+
+@*<div class="jumbotron">
     <div style="text-align:center">
         <img height="200" width="600" src="~/Images/bidding3.jpg" />
     </div>
@@ -36,7 +72,7 @@
    
     <h2>New Item</h2>
     <a>@Html.ActionLink("Add Bid New Item Here!", "Create", "BiddingItems")</a>
-</div>
+</div>*@
 
 
 <div style="align-self:center">
