@@ -84,11 +84,8 @@
                     <h3 class="panel-title">@Html.DisplayFor(modelItem => item.ItemName)</h3>
                 </div>
                 <div class="panel-body" style="text-align:center">
-
                     <img class="MyAwesomeHoverAbilities" src="../../@Html.DisplayFor(model => item.ItemImageURL)" style="height:150px; width:200px" class="img-responsive" alt="Responsive image" />
-                   
                     <div class="contenthover">
-
                         <dl>
                             <dt>
                                 @Html.DisplayFor(modelItem => item.ItemDescription)
@@ -101,7 +98,7 @@
 
                             </dt>
                         </dl>
-                        <div class="btn btn-warning">@Html.ActionLink("Bid Now!", "BiddingPage", "OnGoingBids", new { id = item.BiddingItemID }, null)</div>
+                        <div class="btn btn-warning">@Html.ActionLink("Bid Now!", "BidNow", "Bid", new { id = item.BiddingItemID }, null)</div>
                     </div>
                 </div>
             </div>
