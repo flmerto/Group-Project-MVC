@@ -13,7 +13,8 @@
     @Html.AntiForgeryToken()
     <div class="row">
         <div class="col-md-4" style="align-content:center">
-            <img src="../../@Html.DisplayFor(model => model.bItem.ItemImageURL)" class="img-responsive" alt="Responsive image" />
+            <img src="../../@Html.DisplayFor(model => model.bItem.ItemImageURL)" class="pic" alt="image" />
+            <img src="../../@Html.DisplayFor(model => model.bItem.ItemImageURL)" class="picbig" alt="image" />
         </div>
         <div class="col-sm-5">
             <div class="panel panel-primary">
@@ -25,8 +26,12 @@
                         <div class="form-group">
                             <div class="input-group">
                                 <div class="input-group-addon">$</div>
+                               
                                 @*<input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount">*@
                                 @Html.EditorFor(model => model.onGB.BidPrice, new { htmlAttributes = new { @class = "form-control" } })
+                                <div>
+                                    <button type="submit" class="btn btn-danger">Place Bid</button>
+                                </div>
                                 @*<div class="input-group-addon">.00</div>*@
                             </div>
                         </div>
@@ -63,9 +68,7 @@
                                     @Html.DisplayFor(model => model.bItem.HighestBidPrice)
                                 </dt>
                             </dl>
-                            <div>
-                                <button type="submit" class="btn btn-danger">Place Bid</button>
-                            </div>
+                            
                             @if (ViewData["Approved"] != null)
                             {
                                 <br />
@@ -90,14 +93,11 @@
                         </div>
                     </form>
                 </div>
-
             </div>
-
         </div>
     </div>
 }
-<hr />
-
+@Html.ActionLink("Back to List", "Index", "Home")
 
 
 

@@ -39,14 +39,32 @@
                 <div class="carousel-inner">
                     <div class="item active">
                         <img src="~/Images/bidimage2.jpg" />
+                        <div class="container">
+                            <div class="carousel-caption">                               
+                                <a>@Html.ActionLink("Add Bid Item Here!", "Create", "BiddingItems")</a>
+                            </div>
+
+                        </div>
                     </div>
 
                     <div class="item">
                         <img src="~/Images/bidimage3.jpg" />
+                        <div class="container">
+                            <div class="carousel-caption">                               
+                                <a>@Html.ActionLink("Add Bid Item Here!", "Create", "BiddingItems")</a>
+                            </div>
+
+                        </div>
                     </div>
 
                     <div class="item">
                         <img src="~/Images/bidimage4.jpg" />
+                        <div class="container">
+                            <div class="carousel-caption">                              
+                                <a>@Html.ActionLink("Add Bid Item Here!", "Create", "BiddingItems")</a>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
             </div>
@@ -61,7 +79,7 @@
         </div>
     </div>
 </div>
-<h4>Live Bidding</h4>
+<h4 class="text-info">Live Bidding</h4>
 <hr /> 
 
 @*<div class="jumbotron">
@@ -101,7 +119,7 @@
 
                             </dt>
                         </dl>
-                        <div class="btn btn-warning">@Html.ActionLink("Bid Now!", "BiddingPage", "OnGoingBids", new { id = item.BiddingItemID }, null)</div>
+                        <div class="btn btn-warning">@Html.ActionLink("Bid Now!", "BidNow", "Bid", new { id = item.BiddingItemID }, null)</div>
                     </div>
                 </div>
             </div>
