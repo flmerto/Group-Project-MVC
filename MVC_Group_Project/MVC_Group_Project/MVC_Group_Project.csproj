@@ -202,6 +202,12 @@
     <Content Include="Images\bidimage3.jpg" />
     <Content Include="Images\bidimage4.JPG" />
     <Content Include="Images\classpic.jpg" />
+    <Content Include="Scripts\alertify.js-0.3.11\lib\alertify.js" />
+    <Content Include="Scripts\alertify.js-0.3.11\lib\alertify.min.js" />
+    <Content Include="Scripts\alertify.js-0.3.11\src\alertify.js" />
+    <Content Include="Scripts\alertify.js-0.3.11\themes\alertify.bootstrap.css" />
+    <Content Include="Scripts\alertify.js-0.3.11\themes\alertify.core.css" />
+    <Content Include="Scripts\alertify.js-0.3.11\themes\alertify.default.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />

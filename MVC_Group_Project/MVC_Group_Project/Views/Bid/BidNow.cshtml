@@ -6,6 +6,10 @@
 
 <h2>Bid Now!</h2>
 <script src="~/Scripts/jquery-1.10.2.js"></script>
+<script src="~/Scripts/alertify.js-0.3.11/src/alertify.js"></script>
+<link href="~/Scripts/alertify.js-0.3.11/themes/alertify.bootstrap.css" rel="stylesheet" />
+<link href="~/Scripts/alertify.js-0.3.11/themes/alertify.default.css" rel="stylesheet" />
+<link href="~/Scripts/alertify.js-0.3.11/themes/alertify.core.css" rel="stylesheet" />
 
 <hr />
 @using (Html.BeginForm())
@@ -30,7 +34,7 @@
                                 @*<input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount">*@
                                 @Html.EditorFor(model => model.onGB.BidPrice, new { htmlAttributes = new { @class = "form-control" } })
                                 <div>
-                                    <button type="submit" class="btn btn-danger">Place Bid</button>
+                                    <button id="bidButton" type="submit" class="btn btn-danger">Place Bid</button>
                                 </div>
                                 @*<div class="input-group-addon">.00</div>*@
                             </div>
@@ -45,15 +49,13 @@
                                     Time Left:
                                 </dd>
                                 <dd>
-                                    Start Bid:
+                                    Starting Bid:
                                 </dd>
                                 <dd>
                                     Highest Bid:
                                 </dd>
-                                <dd>
-                                    Item Description:
-                                </dd>
                             </dl>
+                            <div style="padding-bottom:7px">Item Description:</div>
                             <p style="width:400px;">
                                 @Html.DisplayFor(model => model.bItem.ItemDescription)
                             </p>
@@ -75,25 +77,23 @@
                                 </dt>
                             </dl>
                         </div>
+
                         @if (ViewData["Approved"] != null)
                         {
-                            <div style="color:darkblue; padding-left:15px">You have successfully bid to this item!</div>
+                            <script>
+                                alertify.success("You have successfully bid to this item!");
+                            </script>
                             ViewData["Approved"] = null;
-                        }
-                        else
-                        {
-                            <div></div>
                         }
 
                         @if (ViewData["LowerBid"] != null)
                         {
-                            <div style="color:red; padding-left:15px">Please put an amount higher than the current bid!</div>
+                            <script>
+                                alertify.error("Please put an amount higher than the current/starting bid!");
+                            </script>
                             ViewData["LowerBid"] = null;
                         }
-                        else
-                        {
-                            <div></div>
-                        }
+                        
                     </form>
                 </div>
             </div>
@@ -102,5 +102,7 @@
 }
 @Html.ActionLink("Back to List", "Index", "Home")
 
-
+@section Scripts{
+    @Scripts.Render("~/Scripts/alertify.js-0.3.11/src/alertify.js")
+}
 
