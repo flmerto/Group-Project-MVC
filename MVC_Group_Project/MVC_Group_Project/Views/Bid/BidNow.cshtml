@@ -13,7 +13,7 @@
     @Html.AntiForgeryToken()
     <div class="row">
         <div class="col-md-4" style="align-content:center">
-            <img src="../../@Html.DisplayFor(model => model.bItem.ItemImageURL)" class="pic" alt="image" />
+            <img src="../../@Html.DisplayFor(model => model.bItem.ItemImageURL)" style="height:250px; width:350px" class="pic" alt="image" />
             <img src="../../@Html.DisplayFor(model => model.bItem.ItemImageURL)" class="picbig" alt="image" />
         </div>
         <div class="col-sm-5">
@@ -39,7 +39,7 @@
                             <br />
                             <dl>
                                 <dd>
-                                    Number of Bidders:
+                                    Total Bidders:
                                 </dd>
                                 <dd>
                                     Time Left:
@@ -50,7 +50,13 @@
                                 <dd>
                                     Highest Bid:
                                 </dd>
+                                <dd>
+                                    Item Description:
+                                </dd>
                             </dl>
+                            <p style="width:400px;">
+                                @Html.DisplayFor(model => model.bItem.ItemDescription)
+                            </p>
                         </div>
                         <div class="col-md-6">
                             <br />

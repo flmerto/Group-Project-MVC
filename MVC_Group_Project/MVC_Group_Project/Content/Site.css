@@ -39,3 +39,9 @@ textarea {
 .pic:hover + .picbig{
     width:500px;
 }
+
+#ItemDescription {
+    font-family: inherit;
+    width: 295px;
+    height: 130px
+}

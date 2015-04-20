@@ -42,13 +42,12 @@ namespace MVC_Group_Project.Controllers
         {
             if (bid != null)
             {
-
                 var userID = User.Identity.GetUserId();
 
                 try
                 {
-                    var s = db.OnGoingBids.Where(o => o.BiddingItemID == id).OrderByDescending(p => p.OnGoingBidsID);
-                    if (db.OnGoingBids.Count() == 0 || s.Count() == 0)
+                    var noBid = db.OnGoingBids.Where(o => o.BiddingItemID == id);
+                    if (db.OnGoingBids.Count() == 0 || noBid.Count() == 0)
                     {
                         if (bid.onGB.BidPrice > db.BiddingItems.Single(a => a.BiddingItemID == id).BidStartPrice)
                         {

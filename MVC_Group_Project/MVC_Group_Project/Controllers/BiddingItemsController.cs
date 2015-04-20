@@ -122,7 +122,6 @@ namespace MVC_Group_Project.Controllers
         {
             if (ModelState.IsValid)
             {
-                
                 string imagePath = Server.MapPath("~/Images/" + file.FileName);
                 file.SaveAs(imagePath);
 

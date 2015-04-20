@@ -15,6 +15,8 @@ namespace MVC_Group_Project.Models
         [Required]
         public string ItemName { get; set; }
         [Required]
+
+        [DataType(DataType.MultilineText)]
         public string ItemDescription { get; set; }
         public string ItemImageURL { get; set; }
 
