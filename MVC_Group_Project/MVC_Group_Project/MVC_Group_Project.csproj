@@ -215,6 +215,9 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.countdown.package-2.0.2\jquery.countdown.css" />
+    <Content Include="Scripts\jquery.countdown.package-2.0.2\jquery.countdown.js" />
+    <Content Include="Scripts\jquery.countdown.package-2.0.2\jquery.plugin.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />

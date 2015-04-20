@@ -4,8 +4,15 @@
     ViewBag.Title = "Home Page";
 }
 
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<link href="~/Scripts/jquery.countdown.package-2.0.2/jquery.countdown.css" rel="stylesheet" />
+<script src="~/Scripts/jquery.countdown.package-2.0.2/jquery.countdown.js"></script>
+<script src="~/Scripts/jquery.countdown.package-2.0.2/jquery.plugin.js"></script>
+
 @section Scripts {
     @Scripts.Render("~/Scripts/contentHover.js")
+    @Scripts.Render("~/Scripts/jquery.countdown.package-2.0.2/jquery.plugin.js")
+    @Scripts.Render("~/Scripts/jquery.countdown.package-2.0.2/jquery.countdown.js")
 
     <script type="text/javascript">
         function AddHoverEffectOnItemByID(element) {
@@ -118,6 +125,16 @@
                         <div class="btn btn-warning">@Html.ActionLink("Bid Now!", "BidNow", "Bid", new { id = item.BiddingItemID }, null)</div>
                     </div>
                 </div>
+                <div id="@item.BiddingItemID" class="panel-footer" style="padding-bottom: 35px;"></div>
+                <script>
+                    $(document).ready(function () {
+                        var startBid = new Date();
+                        var endBid = new Date(@item.BidEndTime.ToString("yyyy,MM,dd"));
+                        var timeLeft = (endBid - startBid) / 1000;
+                        $('#@item.BiddingItemID').countdown({ until: timeLeft, format: 'HMS' });
+                    });
+                </script>
+
             </div>
         </div>
     }
