@@ -90,6 +90,7 @@ namespace MVC_Group_Project.Controllers
             else
             {
                 ViewBag.SubCategoryID = new SelectList(db.SubCategories, "SubCategoryID", "SubCategoryName");
+                
             }
 
             return View(biddingItem);
