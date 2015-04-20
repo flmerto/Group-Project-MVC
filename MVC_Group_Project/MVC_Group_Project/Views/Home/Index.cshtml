@@ -129,8 +129,8 @@
                 <script>
                     $(document).ready(function () {
                         var startBid = new Date();
-                        var endBid = new Date(@item.BidEndTime.ToString("yyyy,MM,dd"));
-                        var timeLeft = (endBid - startBid) / 1000;
+                        var endBid = new Date(@item.BidEndTime.ToString("yyyy,MM-1,dd"));
+                        var timeLeft = Math.abs(endBid - startBid)/1000;
                         $('#@item.BiddingItemID').countdown({ until: timeLeft, format: 'HMS' });
                     });
                 </script>
