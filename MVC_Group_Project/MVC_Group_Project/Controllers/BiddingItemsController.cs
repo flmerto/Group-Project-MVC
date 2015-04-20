@@ -127,9 +127,6 @@ namespace MVC_Group_Project.Controllers
 
                 biddingItem.ItemImageURL = "Images/" + file.FileName;
 
-                db.BiddingItems.Add(biddingItem);
-                db.SaveChanges();
-
                 db.Entry(biddingItem).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
