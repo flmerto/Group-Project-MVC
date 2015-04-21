@@ -103,18 +103,20 @@
 <div style="align-self:center">
     @foreach (var item in Model)
     {
-        <div class="col-sm-3">
+        <div class="col-sm-3" id="@item.ItemName@item.BiddingItemID@string.Concat("Main")">
             <div class="panel panel-primary" style="text-align:center">
                 <div class="panel-heading">
                     <h3 class="panel-title">@Html.DisplayFor(modelItem => item.ItemName)</h3>
                 </div>
                 <div class="panel-body" style="padding-left:27px">
-                    <img class="MyAwesomeHoverAbilities" src="../../@Html.DisplayFor(model => item.ItemImageURL)" style="height:150px; width:200px" class="img-responsive" alt="Responsive image" />
+                    <img class="MyAwesomeHoverAbilities" id="@item.ItemName.Replace(" ", "")@Math.Round(item.HighestBidPrice, 0)" style="height:150px; width:200px;" src="~/@item.ItemImageURL" class="img-responsive" alt="Responsive image" />
+                    <img class="MyAwesomeHoverAbilities" id="@item.ItemName.Replace(" ", "")@item.BiddingItemID" style="position: absolute; top: 0; left: 0;height:150px; width:200px;" />
+
                     <div class="contenthover">
                         <dl>
                             @*<dt>
-                                @Html.DisplayFor(modelItem => item.ItemDescription)
-                            </dt>*@
+                                    @Html.DisplayFor(modelItem => item.ItemDescription)
+                                </dt>*@
                             <dt>
                                 Bid Ends: @Html.DisplayFor(modelItem => item.BidEndTime)
                             </dt>
@@ -125,16 +127,51 @@
                         <div class="btn btn-warning">@Html.ActionLink("Bid Now!", "BidNow", "Bid", new { id = item.BiddingItemID }, null)</div>
                     </div>
                 </div>
+
                 <div id="@item.BiddingItemID" class="panel-footer" style="padding-bottom: 35px;"></div>
                 <script>
                     $(document).ready(function () {
                         var startBid = new Date();
                         var endBid = new Date(@item.BidEndTime.ToString("yyyy,MM-1,dd"));
-                        var timeLeft = Math.abs(endBid - startBid)/1000;
+                        var timeLeft = Math.abs(endBid - startBid) / 1000;
                         $('#@item.BiddingItemID').countdown({ until: timeLeft, format: 'HMS' });
+
+                        if (endBid < new Date()) {
+                            var ifItemHasBids = parseInt(@item.HighestBidPrice);
+                            if (ifItemHasBids != 0.00 || ifItemHasBids != 0) {
+                                $("#@item.ItemName.Replace(" ", "")@item.BiddingItemID").attr("src", "../Images/sold-sign.png").show(); // will show the expired image on top of the item img
+                                $('#@item.ItemName.Replace(" ", "")@Math.Round(item.HighestBidPrice,0)').css({ position: "absolute", left: "43px" }); // will add css for the image not to go out of the panel
+                                $("#@item.ItemName.Replace(" ", "")@item.BiddingItemID").removeClass("MyAwesomeHoverAbilities"); // Item Picture, removed the hover effect on expired items, so the users cant bid on it anymore
+                                $('#@item.ItemName.Replace(" ", "")@Math.Round(item.HighestBidPrice,0)').removeClass("MyAwesomeHoverAbilities"); // Expired Picture, removed the hover effect on expired items, so the users cant bid on it anymore
+                                $('#@item.ItemName.Replace(" ", "")@item.BiddingItemID').css({ position: "absolute", left: "43px", top: "54px" }); // will add css for the image not to go out of the panel
+
+                                $('#@item.BiddingItemID').countdown('destroy'); // removed the timer on expired items
+
+                                // If the item is expired it will fadeout then removed
+                                $('#@item.ItemName@item.BiddingItemID@string.Concat("Main")').fadeOut(7000, function () {
+                                    $('@item.ItemName@item.BiddingItemID@string.Concat("Main")').remove();
+                                });
+                            }
+                            else {
+                                $("#@item.ItemName.Replace(" ", "")@item.BiddingItemID").attr("src", "../Images/sash-expired.png").show(); // will show the expired image on top of the item img
+                                $('#@item.ItemName.Replace(" ", "")@Math.Round(item.HighestBidPrice,0)').css({ position: "absolute", left: "43px" }); // will add css for the image not to go out of the panel
+                                $("#@item.ItemName.Replace(" ", "")@item.BiddingItemID").removeClass("MyAwesomeHoverAbilities"); // Item Picture, removed the hover effect on expired items, so the users cant bid on it anymore
+                                $('#@item.ItemName.Replace(" ", "")@Math.Round(item.HighestBidPrice,0)').removeClass("MyAwesomeHoverAbilities"); // Expired Picture, removed the hover effect on expired items, so the users cant bid on it anymore
+                                $('#@item.ItemName.Replace(" ", "")@item.BiddingItemID').css({ position: "absolute", left: "43px", top: "54px" }); // will add css for the image not to go out of the panel
+
+                                $('#@item.BiddingItemID').countdown('destroy'); // removed the timer on expired items
+
+                                // If the item is expired it will fadeout then removed
+                                $('#@item.ItemName@item.BiddingItemID@string.Concat("Main")').fadeOut(7500, function () {
+                                    $('@item.ItemName@item.BiddingItemID@string.Concat("Main")').remove();
+                                });
+                            }
+                        }
+                        else {
+                            $("#@item.ItemName.Replace(" ", "")@item.BiddingItemID").remove(); // will not show expired/sold image if endbid is not today
+                        }
                     });
                 </script>
-
             </div>
         </div>
     }
