@@ -310,13 +310,20 @@ namespace MVC_Group_Project.Controllers
                     if (cc.CardType != null)
                     {
                         var userId = User.Identity.GetUserId();
-                        cc.UserId = userId;
+                        var checkIfUserAlreadyHasCreditCard = db.CreditCards.Where(c => c.UserId == userId).ToList();
+                        if (checkIfUserAlreadyHasCreditCard.Count == 1)
+                        {
+                            ViewData["hasCreditCard"] = "true";
+                        }
+                        else
+                        {
+                            cc.UserId = userId;
 
-                        db.CreditCards.Add(cc);
-                        db.SaveChanges();
+                            db.CreditCards.Add(cc);
+                            db.SaveChanges();
 
-                        return Redirect("../Home/Index");
-                        //return View(cc);
+                            return Redirect("../Home/Index");
+                        }
                     }
                     else if (editUser.FirstName != null)
                     {

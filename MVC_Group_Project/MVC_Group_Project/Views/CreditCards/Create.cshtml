@@ -6,6 +6,11 @@
 
 <h2 style="padding-left:90px">Add a credit card</h2>
 
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script src="~/Scripts/alertify.js-0.3.11/src/alertify.js"></script>
+<link href="~/Scripts/alertify.js-0.3.11/themes/alertify.bootstrap.css" rel="stylesheet" />
+<link href="~/Scripts/alertify.js-0.3.11/themes/alertify.default.css" rel="stylesheet" />
+<link href="~/Scripts/alertify.js-0.3.11/themes/alertify.core.css" rel="stylesheet" />
 
 @using (Html.BeginForm()) 
 {
@@ -46,6 +51,13 @@
             </div>
         </div>
 
+        @if (ViewData["hasCreditCard"] == "true") 
+        {
+         <script>
+             alertify.log("You already have a credit card in your account.", "",  0);
+         </script>   
+        }
+
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Add" class="btn btn-primary" />
@@ -60,4 +72,5 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Scripts/alertify.js-0.3.11/src/alertify.js")
 }

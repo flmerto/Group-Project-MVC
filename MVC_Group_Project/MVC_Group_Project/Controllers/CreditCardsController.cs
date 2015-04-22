@@ -59,11 +59,21 @@ namespace MVC_Group_Project.Controllers
             if (ModelState.IsValid)
             {
                 var userId = User.Identity.GetUserId();
-                creditCard.UserId = userId;
 
-                db.CreditCards.Add(creditCard);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                var checkIfUserAlreadyHasCreditCard = db.CreditCards.Where(c => c.UserId == userId).ToList();
+                if (checkIfUserAlreadyHasCreditCard.Count == 1)
+                {
+                    ViewData["hasCreditCard"] = "true";
+                }
+                else
+                {
+                    creditCard.UserId = userId;
+
+                    db.CreditCards.Add(creditCard);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+
             }
 
             return View(creditCard);

@@ -6,18 +6,20 @@ using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.AspNet.Identity;
+using MVC_Group_Project.Filters;
 
 
 namespace MVC_Group_Project.Controllers
 {
+    [CustomAuthorization(Role = "Admin")]
     public class TransactionsController : Controller
     {
         private ApplicationDbContext db = System.Web.HttpContext.Current.GetOwinContext().Get<ApplicationDbContext>();
-
+        
         // GET: Transactions
         public ActionResult Index()
         {
-            var expiredBiddingItems = db.BiddingItems.Where(b => b.BidEndTime <= DateTime.Now).OrderBy(m => m.HighestBidPrice).ToList();
+            var expiredBiddingItems = db.BiddingItems.Where(b => b.BidEndTime >= DateTime.Now).ToList();
 
             if (expiredBiddingItems.Count() == 0)
             {
@@ -26,18 +28,29 @@ namespace MVC_Group_Project.Controllers
             }
             else
             {
-                for (int i = expiredBiddingItems.Count; i <= expiredBiddingItems.Count; i--)
+                for (int i = 0; i <= expiredBiddingItems.Count; i++)
                 {
-                    var expiredBI = expiredBiddingItems[i - 1];
+                    var expiredBI = expiredBiddingItems[i];
                     var itemThatIsAlreadySold = db.Transactions.Where(k => k.BiddingItemID == expiredBI.BiddingItemID).ToList();
-                    if (itemThatIsAlreadySold.Count == 0)
+                    if (expiredBI.HighestBidPrice == 0)
                     {
-                        break;
+                        // will remove the item from the list if it doesnt have any bids
+                        expiredBiddingItems.RemoveAt(i);
+                        i--;
                     }
                     else
-                    {
-                        expiredBiddingItems.RemoveAt(i - 1);
-                    }
+	                {
+                        if (itemThatIsAlreadySold.Count == 0)
+                        {
+                            break; // will get out of the loop if the item has not been yet sold
+                        }
+                        else
+                        {
+                            expiredBiddingItems.RemoveAt(i);
+
+                        }
+	                }
+                    
                 }
 
                 if (expiredBiddingItems.Count() == 0)
