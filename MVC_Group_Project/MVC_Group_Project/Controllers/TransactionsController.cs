@@ -37,7 +37,6 @@ namespace MVC_Group_Project.Controllers
                     else
                     {
                         expiredBiddingItems.RemoveAt(i - 1);
-
                     }
                 }
 
