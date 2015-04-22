@@ -73,7 +73,6 @@ namespace MVC_Group_Project.Controllers
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
-
             }
 
             return View(creditCard);

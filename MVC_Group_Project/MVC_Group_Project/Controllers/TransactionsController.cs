@@ -30,7 +30,7 @@ namespace MVC_Group_Project.Controllers
             {
                 for (int i = 0; i < expiredBiddingItems.Count; i++)
                 {
-                    var expiredBI = expiredBiddingItems[i];
+                    var expiredBI = expiredBiddingItems[i]; // expiredBI will have the values of the specific item according to the i
                     var itemThatIsAlreadySold = db.Transactions.Where(k => k.BiddingItemID == expiredBI.BiddingItemID).ToList();
                     if (expiredBI.HighestBidPrice == 0)
                     {
@@ -55,7 +55,7 @@ namespace MVC_Group_Project.Controllers
 
                 if (expiredBiddingItems.Count() == 0)
                 {
-                    ViewData["UpdateStatus"] = "All items has been sold.";
+                    ViewData["UpdateStatus"] = "All items has been sold";
                     return View();
                 }
                 else

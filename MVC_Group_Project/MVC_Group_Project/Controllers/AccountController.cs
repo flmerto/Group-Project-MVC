@@ -314,6 +314,7 @@ namespace MVC_Group_Project.Controllers
                         if (checkIfUserAlreadyHasCreditCard.Count == 1)
                         {
                             ViewData["hasCreditCard"] = "true";
+                            return View();
                         }
                         else
                         {
