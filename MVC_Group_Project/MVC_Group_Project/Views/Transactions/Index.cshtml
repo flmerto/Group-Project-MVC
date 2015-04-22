@@ -6,6 +6,7 @@
 
 <h1>Transactions</h1>
 
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script src="~/Scripts/jquery-1.10.2.js"></script>
 <script src="~/Scripts/alertify.js-0.3.11/src/alertify.js"></script>
 <link href="~/Scripts/alertify.js-0.3.11/themes/alertify.bootstrap.css" rel="stylesheet" />
@@ -17,9 +18,7 @@
     <br />
     <h2>There are no expired items to update.</h2>
     <script>
-    $(document).ready(function () {
         alertify.alert("There are no expired items to update.");
-    });
     </script>
 }
 else if (ViewData["UpdateStatus"] == "There are no items that have bids.")
@@ -27,9 +26,7 @@ else if (ViewData["UpdateStatus"] == "There are no items that have bids.")
     <br />
     <h2>There are no items that have bids.</h2>
     <script>
-    $(document).ready(function () {
         alertify.alert("There are no items that have bids.");
-    });
     </script>
 }
 else if (ViewData["UpdateStatus"] == "Items Sold/Expired")
@@ -37,9 +34,7 @@ else if (ViewData["UpdateStatus"] == "Items Sold/Expired")
     <br />
     <h2>All expired items are now updated.</h2>
     <script>
-        $(document).ready(function () {
             alertify.alert("All expired items are now updated.");
-        });
     </script>
 }
 else if (ViewData["UpdateStatus"] == "All items has been sold.")
@@ -47,9 +42,7 @@ else if (ViewData["UpdateStatus"] == "All items has been sold.")
     <br />
     <h2>All items has been sold or expired!</h2>
     <script>
-        $(document).ready(function () {
-            alertify.alert("All items has been sold.");
-        });
+        alertify.alert("All items has been sold.");
     </script>
 }
 
