@@ -28,7 +28,7 @@ namespace MVC_Group_Project.Controllers
             }
             else
             {
-                for (int i = 0; i <= expiredBiddingItems.Count; i++)
+                for (int i = 0; i < expiredBiddingItems.Count; i++)
                 {
                     var expiredBI = expiredBiddingItems[i];
                     var itemThatIsAlreadySold = db.Transactions.Where(k => k.BiddingItemID == expiredBI.BiddingItemID).ToList();
@@ -36,7 +36,7 @@ namespace MVC_Group_Project.Controllers
                     {
                         // will remove the item from the list if it doesnt have any bids
                         expiredBiddingItems.RemoveAt(i);
-                        i--;
+                        i--; // will decrease the i count to match the current spot on the expiredBiddingItems
                     }
                     else
 	                {
@@ -47,7 +47,7 @@ namespace MVC_Group_Project.Controllers
                         else
                         {
                             expiredBiddingItems.RemoveAt(i);
-
+                            i--;
                         }
 	                }
                     
@@ -77,7 +77,6 @@ namespace MVC_Group_Project.Controllers
                             if (itemWithTheHighestBid.Count == 0)
                             {
                                 ViewData["UpdateStatus"] = "There are no items that have bids.";
-                                return View();
                             }
                             else
                             {
@@ -96,7 +95,6 @@ namespace MVC_Group_Project.Controllers
                                 }
                             }
                         }
-                        ViewData["UpdateStatus"] = "There are no items that have bids.";
                     }
                 }
             }
