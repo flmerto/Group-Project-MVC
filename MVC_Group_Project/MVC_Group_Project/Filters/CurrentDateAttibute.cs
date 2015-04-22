@@ -9,11 +9,20 @@ namespace MVC_Group_Project.Filters
    
         public class CurrentDateAttibute : ValidationAttribute
         {
-            public override bool IsValid(object value)
+            public override bool IsValid(object date)
             {
-                DateTime dateTime = Convert.ToDateTime(value);
-                return dateTime >= DateTime.Now.AddDays(-1);
+                if (Convert.ToDateTime(date) >= DateTime.Now)
+                {
+                    DateTime startdateTime = Convert.ToDateTime(date);
+                    return startdateTime >= DateTime.Now.AddDays(-1);    
+                }
+                else
+                {
+                    DateTime enddateTime = Convert.ToDateTime(date);
+                    return enddateTime <= DateTime.Now.AddDays(-1);
 
+                }
+                
             }
 
         }
