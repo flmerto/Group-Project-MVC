@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNet.Identity.EntityFramework;
+using MVC_Group_Project.Filters;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -13,6 +14,10 @@ namespace MVC_Group_Project.Models
         public int CreditCardID { get; set; }
         public string CardType { get; set; }
         public string CardHolderName { get; set; }
+
+        [DataType(DataType.Date)]
+        [CurrentDateAttibute]
+        [Required(ErrorMessage = "Date Error!")]
         public DateTime ExpiryDate { get; set; }
         public int CSC { get; set; }
 

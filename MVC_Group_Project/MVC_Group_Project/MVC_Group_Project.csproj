@@ -165,6 +165,7 @@
     <Compile Include="Controllers\CreditCardsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OnGoingBidsController.cs" />
+    <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\RolesAdminController.cs" />
     <Compile Include="Controllers\SubCategoriesController.cs" />
     <Compile Include="Controllers\TransactionsController.cs" />
@@ -187,6 +188,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ModelsForBiddingPage.cs" />
     <Compile Include="Models\OnGoingBids.cs" />
+    <Compile Include="Models\Reports.cs" />
     <Compile Include="Models\SubCategory.cs" />
     <Compile Include="Models\Transactions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -294,6 +296,7 @@
     <Content Include="Views\BiddingItems\Index.cshtml" />
     <Content Include="Views\Bid\BidNow.cshtml" />
     <Content Include="Views\Transactions\Index.cshtml" />
+    <Content Include="Views\Reports\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

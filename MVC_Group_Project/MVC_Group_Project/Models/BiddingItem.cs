@@ -43,7 +43,7 @@ namespace MVC_Group_Project.Models
         {
             get
             {
-                return string.Format("{0},{1}", this.BidStartTime, this.BidEndTime);
+                return string.Format("{0} - {1}", this.BidStartTime.ToShortDateString(), this.BidEndTime.ToShortDateString());
             }
         }
 
