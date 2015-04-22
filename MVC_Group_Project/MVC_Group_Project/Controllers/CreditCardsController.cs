@@ -13,18 +13,20 @@ using Microsoft.AspNet.Identity.Owin;
 
 namespace MVC_Group_Project.Controllers
 {
-    [CustomAuthorization(Role = "Admin")] 
+    
     public class CreditCardsController : Controller
     {   
         private ApplicationDbContext db = System.Web.HttpContext.Current.GetOwinContext().Get<ApplicationDbContext>();
 
         // GET: CreditCards
+        [CustomAuthorization(Role = "Admin")] 
         public ActionResult Index()
         {
             return View(db.CreditCards.ToList());
         }
 
         // GET: CreditCards/Details/5
+        [CustomAuthorization(Role = "Admin")] 
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -40,6 +42,7 @@ namespace MVC_Group_Project.Controllers
         }
 
         // GET: CreditCards/Create
+        [Authorize]
         public ActionResult Create()
         {
             return View();
@@ -48,6 +51,7 @@ namespace MVC_Group_Project.Controllers
         // POST: CreditCards/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "CreditCardID,CardType,CardHolderName,ExpiryDate,CSC")] CreditCard creditCard)
@@ -66,6 +70,7 @@ namespace MVC_Group_Project.Controllers
         }
 
         // GET: CreditCards/Edit/5
+        [CustomAuthorization(Role = "Admin")] 
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -83,6 +88,7 @@ namespace MVC_Group_Project.Controllers
         // POST: CreditCards/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [CustomAuthorization(Role = "Admin")] 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "CreditCardID,CardType,CardHolderName,ExpiryDate,CSC,UserID")] CreditCard creditCard)
@@ -97,6 +103,7 @@ namespace MVC_Group_Project.Controllers
         }
 
         // GET: CreditCards/Delete/5
+        [CustomAuthorization(Role = "Admin")] 
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -112,6 +119,7 @@ namespace MVC_Group_Project.Controllers
         }
 
         // POST: CreditCards/Delete/5
+        [CustomAuthorization(Role = "Admin")] 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

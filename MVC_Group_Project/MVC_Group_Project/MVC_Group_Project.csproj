@@ -167,15 +167,16 @@
     <Compile Include="Controllers\OnGoingBidsController.cs" />
     <Compile Include="Controllers\RolesAdminController.cs" />
     <Compile Include="Controllers\SubCategoriesController.cs" />
+    <Compile Include="Controllers\TransactionsController.cs" />
     <Compile Include="Controllers\UsersAdminController.cs" />
     <Compile Include="Filters\CustomAuthorization.cs" />
     <Compile Include="Filters\CurrentDateAttibute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201504152223576_init.cs" />
-    <Compile Include="Migrations\201504152223576_init.Designer.cs">
-      <DependentUpon>201504152223576_init.cs</DependentUpon>
+    <Compile Include="Migrations\201504220604233_init.cs" />
+    <Compile Include="Migrations\201504220604233_init.Designer.cs">
+      <DependentUpon>201504220604233_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -313,6 +314,7 @@
     <Content Include="Views\BiddingItems\Edit.cshtml" />
     <Content Include="Views\BiddingItems\Index.cshtml" />
     <Content Include="Views\Bid\BidNow.cshtml" />
+    <Content Include="Views\Transactions\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -325,8 +327,8 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201504152223576_init.resx">
-      <DependentUpon>201504152223576_init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201504220604233_init.resx">
+      <DependentUpon>201504220604233_init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

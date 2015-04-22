@@ -8,11 +8,17 @@
 <link href="~/Scripts/jquery.countdown.package-2.0.2/jquery.countdown.css" rel="stylesheet" />
 <script src="~/Scripts/jquery.countdown.package-2.0.2/jquery.countdown.js"></script>
 <script src="~/Scripts/jquery.countdown.package-2.0.2/jquery.plugin.js"></script>
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script src="~/Scripts/alertify.js-0.3.11/src/alertify.js"></script>
+<link href="~/Scripts/alertify.js-0.3.11/themes/alertify.bootstrap.css" rel="stylesheet" />
+<link href="~/Scripts/alertify.js-0.3.11/themes/alertify.default.css" rel="stylesheet" />
+<link href="~/Scripts/alertify.js-0.3.11/themes/alertify.core.css" rel="stylesheet" />
 
 @section Scripts {
     @Scripts.Render("~/Scripts/contentHover.js")
     @Scripts.Render("~/Scripts/jquery.countdown.package-2.0.2/jquery.plugin.js")
     @Scripts.Render("~/Scripts/jquery.countdown.package-2.0.2/jquery.countdown.js")
+    @Scripts.Render("~/Scripts/alertify.js-0.3.11/src/alertify.js")
 
     <script type="text/javascript">
         function AddHoverEffectOnItemByID(element) {
@@ -103,7 +109,7 @@
 <div style="align-self:center">
     @foreach (var item in Model)
     {
-        <div class="col-sm-3" id="@item.ItemName@item.BiddingItemID@string.Concat("Main")">
+        <div class="col-sm-3" id="@item.ItemName.Replace(" ", "")@item.BiddingItemID@string.Concat("Main")">
             <div class="panel panel-primary" style="text-align:center">
                 <div class="panel-heading">
                     <h3 class="panel-title">@Html.DisplayFor(modelItem => item.ItemName)</h3>
@@ -136,7 +142,7 @@
                         var timeLeft = Math.abs(endBid - startBid) / 1000;
                         $('#@item.BiddingItemID').countdown({ until: timeLeft, format: 'HMS' });
 
-                        if (endBid < new Date()) {
+                        if (endBid <= new Date()) {
                             var ifItemHasBids = parseInt(@item.HighestBidPrice);
                             if (ifItemHasBids != 0.00 || ifItemHasBids != 0) {
                                 $("#@item.ItemName.Replace(" ", "")@item.BiddingItemID").attr("src", "../Images/sold-sign.png").show(); // will show the expired image on top of the item img
@@ -148,8 +154,9 @@
                                 $('#@item.BiddingItemID').countdown('destroy'); // removed the timer on expired items
 
                                 // If the item is expired it will fadeout then removed
-                                $('#@item.ItemName@item.BiddingItemID@string.Concat("Main")').fadeOut(7000, function () {
-                                    $('@item.ItemName@item.BiddingItemID@string.Concat("Main")').remove();
+                                $('#@item.ItemName.Replace(" ", "")@item.BiddingItemID@string.Concat("Main")').fadeOut(7500, function () {
+                                    $('#@item.ItemName.Replace(" ", "")@item.BiddingItemID@string.Concat("Main")').remove();
+                                    alertify.success("@item.ItemName@string.Concat(" has been sold!")");
                                 });
                             }
                             else {
@@ -162,8 +169,9 @@
                                 $('#@item.BiddingItemID').countdown('destroy'); // removed the timer on expired items
 
                                 // If the item is expired it will fadeout then removed
-                                $('#@item.ItemName@item.BiddingItemID@string.Concat("Main")').fadeOut(7500, function () {
-                                    $('@item.ItemName@item.BiddingItemID@string.Concat("Main")').remove();
+                                $('#@item.ItemName.Replace(" ", "")@item.BiddingItemID@string.Concat("Main")').fadeOut(7500, function () {
+                                    $('#@item.ItemName.Replace(" ", "")@item.BiddingItemID@string.Concat("Main")').remove();
+                                    alertify.error("@item.ItemName@string.Concat(" is now expired!")");
                                 });
                             }
                         }

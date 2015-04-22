@@ -154,10 +154,28 @@ namespace MVC_Group_Project.Migrations
                 .PrimaryKey(t => t.Id)
                 .Index(t => t.Name, unique: true, name: "RoleNameIndex");
             
+            CreateTable(
+                "dbo.Transactions",
+                c => new
+                    {
+                        TransactionsID = c.Int(nullable: false, identity: true),
+                        PurchaseDateTime = c.DateTime(nullable: false),
+                        Amount = c.Double(nullable: false),
+                        BiddingItemID = c.Int(nullable: false),
+                        CreditCardID = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.TransactionsID)
+                .ForeignKey("dbo.BiddingItems", t => t.BiddingItemID, cascadeDelete: true)
+                .ForeignKey("dbo.CreditCards", t => t.CreditCardID, cascadeDelete: true)
+                .Index(t => t.BiddingItemID)
+                .Index(t => t.CreditCardID);
+            
         }
         
         public override void Down()
         {
+            DropForeignKey("dbo.Transactions", "CreditCardID", "dbo.CreditCards");
+            DropForeignKey("dbo.Transactions", "BiddingItemID", "dbo.BiddingItems");
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
             DropForeignKey("dbo.OnGoingBids", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.OnGoingBids", "BiddingItemID", "dbo.BiddingItems");
@@ -168,6 +186,8 @@ namespace MVC_Group_Project.Migrations
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.BiddingItems", "SubCategoryID", "dbo.SubCategories");
             DropForeignKey("dbo.SubCategories", "CategoryID", "dbo.Categories");
+            DropIndex("dbo.Transactions", new[] { "CreditCardID" });
+            DropIndex("dbo.Transactions", new[] { "BiddingItemID" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
             DropIndex("dbo.OnGoingBids", new[] { "BiddingItemID" });
             DropIndex("dbo.OnGoingBids", new[] { "UserId" });
@@ -180,6 +200,7 @@ namespace MVC_Group_Project.Migrations
             DropIndex("dbo.SubCategories", new[] { "CategoryID" });
             DropIndex("dbo.BiddingItems", new[] { "UserId" });
             DropIndex("dbo.BiddingItems", new[] { "SubCategoryID" });
+            DropTable("dbo.Transactions");
             DropTable("dbo.AspNetRoles");
             DropTable("dbo.OnGoingBids");
             DropTable("dbo.CreditCards");
