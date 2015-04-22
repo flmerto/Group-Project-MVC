@@ -55,7 +55,7 @@ namespace MVC_Group_Project.Controllers
 
                 if (expiredBiddingItems.Count() == 0)
                 {
-                    ViewData["UpdateStatus"] = "All items has been sold";
+                    ViewData["UpdateStatus"] = "All items has been sold.";
                     return View();
                 }
                 else

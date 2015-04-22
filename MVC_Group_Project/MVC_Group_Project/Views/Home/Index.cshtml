@@ -151,7 +151,7 @@
                                 $('#@item.ItemName.Replace(" ", "")@Math.Round(item.HighestBidPrice,0)').removeClass("MyAwesomeHoverAbilities"); // Expired Picture, removed the hover effect on expired items, so the users cant bid on it anymore
                                 $('#@item.ItemName.Replace(" ", "")@item.BiddingItemID').css({ position: "absolute", left: "43px", top: "54px" }); // will add css for the image not to go out of the panel
 
-                                $('#@item.BiddingItemID').countdown('destroy'); // removed the timer on expired items
+                                $('#@item.BiddingItemID').countdown('destroy'); // removed the timer on sold items
 
                                 // If the item is expired it will fadeout then removed
                                 $('#@item.ItemName.Replace(" ", "")@item.BiddingItemID@string.Concat("Main")').fadeOut(7500, function () {
