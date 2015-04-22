@@ -4,6 +4,12 @@
     ViewBag.Title = "Create Bid Item";
 }
 
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script src="~/Scripts/alertify.js-0.3.11/src/alertify.js"></script>
+<link href="~/Scripts/alertify.js-0.3.11/themes/alertify.bootstrap.css" rel="stylesheet" />
+<link href="~/Scripts/alertify.js-0.3.11/themes/alertify.default.css" rel="stylesheet" />
+<link href="~/Scripts/alertify.js-0.3.11/themes/alertify.core.css" rel="stylesheet" />
+
 
 @using (Html.BeginForm("Create", "BiddingItems", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
@@ -70,8 +76,17 @@
         </div>
         @if (ViewData["Success"] == "false")
         {
-            <div style="padding-left:200px; color:red">Please put an image!</div>
-            <br />
+            <script>
+                alertify.error("Please put an image!");
+            </script>
+            ViewData["Success"] = null;
+        }
+        else if(ViewData["Success"] == "NoCategory")
+        {
+            
+            <script>
+                alertify.log("There is no Categories to pick from please email the admin.", "", 0);
+            </script>   
             ViewData["Success"] = null;
         }
         else
@@ -101,5 +116,7 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Scripts/alertify.js-0.3.11/src/alertify.js")
+
 
 }

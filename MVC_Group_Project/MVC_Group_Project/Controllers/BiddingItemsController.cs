@@ -64,27 +64,45 @@ namespace MVC_Group_Project.Controllers
                 }
                 else
                 {
-                    var userID = User.Identity.GetUserId();
-                    biddingItem.UserId = userID;
-
-                    string imagePath = Server.MapPath("~/Images/" + file.FileName);
-                    file.SaveAs(imagePath);
-
-                    biddingItem.ItemImageURL = "Images/" + file.FileName;
-
-                    db.BiddingItems.Add(biddingItem);
-                    db.SaveChanges();
-
-                    ViewData["Success"] = "true";
-                    
-                    if (User.IsInRole("Admin"))
+                    if (biddingItem.SubCategoryID == 0)
                     {
-                        return RedirectToAction("Index");
+                        
+                        if (User.IsInRole("Admin"))
+                        {
+                            return Redirect("../Categories/Create");
+                        }
+                        else
+                        {
+                            ViewBag.SubCategoryID = new SelectList(db.SubCategories, "SubCategoryID", "SubCategoryName");
+                            ViewData["Success"] = "NoCategory";
+                        }
                     }
                     else
                     {
-                        return Redirect("~/Home/Index");
+                        var userID = User.Identity.GetUserId();
+                        biddingItem.UserId = userID;
+
+                        string imagePath = Server.MapPath("~/Images/" + file.FileName);
+                        file.SaveAs(imagePath);
+
+                        biddingItem.ItemImageURL = "Images/" + file.FileName;
+
+                        db.BiddingItems.Add(biddingItem);
+                        db.SaveChanges();
+
+                        ViewData["Success"] = "true";
+
+                        if (User.IsInRole("Admin"))
+                        {
+                            return RedirectToAction("Index");
+                        }
+                        else
+                        {
+                            return Redirect("~/Home/Index");
+                        }  
                     }
+
+                    
                 }
             }
             else
