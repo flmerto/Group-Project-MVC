@@ -133,9 +133,10 @@
                         <div class="btn btn-warning">@Html.ActionLink("Bid Now!", "BidNow", "Bid", new { id = item.BiddingItemID }, null)</div>
                     </div>
                 </div>
-
+                
                 <div id="@item.BiddingItemID" class="panel-footer" style="padding-bottom: 35px;"></div>
                 <script>
+                    
                     $(document).ready(function () {
                         var startBid = new Date();
                         var endBid = new Date(@item.BidEndTime.ToString("yyyy,MM-1,dd"));

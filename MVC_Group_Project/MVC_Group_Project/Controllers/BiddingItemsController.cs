@@ -141,14 +141,24 @@ namespace MVC_Group_Project.Controllers
         {
             if (ModelState.IsValid)
             {
-                string imagePath = Server.MapPath("~/Images/" + file.FileName);
-                file.SaveAs(imagePath);
+                if (file == null)
+                {
+                    ViewData["Success"] = "false";
+                    ViewBag.SubCategoryID = new SelectList(db.SubCategories, "SubCategoryID", "SubCategoryName");
+                }
+                else
+                {
+                    string imagePath = Server.MapPath("~/Images/" + file.FileName);
+                    file.SaveAs(imagePath);
 
-                biddingItem.ItemImageURL = "Images/" + file.FileName;
+                    biddingItem.ItemImageURL = "Images/" + file.FileName;
+                    biddingItem.UserId = User.Identity.GetUserId();
 
-                db.Entry(biddingItem).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                    db.Entry(biddingItem).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+
             }
             ViewBag.SubCategoryID = new SelectList(db.SubCategories, "SubCategoryID", "SubCategoryName", biddingItem.SubCategoryID);
             ViewBag.UserId = new SelectList(db.Users, "Id", "Address", biddingItem.UserId);
