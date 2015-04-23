@@ -20,6 +20,8 @@
     @Scripts.Render("~/Scripts/alertifyjs/alertify.js")
 
     <script type="text/javascript">
+        var AlertFadeOutTimerInSeconds = 2;
+
         function AddHoverEffectOnItemByID(element) {
             $('.' + element).contenthover({
                 overlay_width: 200,
@@ -140,9 +142,10 @@
                                 $('#@string.Concat("cntdwn")@item.BiddingItemID').countdown('destroy'); // removed the timer on sold items
 
                                 // If the item is expired it will fadeout then removed
-                                $('#@string.Concat("PNL")@item.BiddingItemID@string.Concat("Main")').fadeOut(7500, function () {
+                                $('#@string.Concat("PNL")@item.BiddingItemID@string.Concat("Main")').fadeOut(7000, function () {
                                     $('#@string.Concat("PNL")@item.BiddingItemID@string.Concat("Main")').remove();
-                                    alertify.success("@item.ItemName@string.Concat(" has been sold!")");
+                                    AlertFadeOutTimerInSeconds = AlertFadeOutTimerInSeconds + 1;
+                                    alertify.success("@item.ItemName@string.Concat(" has been sold!")", AlertFadeOutTimerInSeconds);
                                 });
                             }
                             else {
@@ -155,9 +158,11 @@
                                 $('#@string.Concat("cntdwn")@item.BiddingItemID').countdown('destroy'); // removed the timer on expired items
 
                                 // If the item is expired it will fadeout then removed
-                                $('#@string.Concat("PNL")@item.BiddingItemID@string.Concat("Main")').fadeOut(7500, function () {
+                                $('#@string.Concat("PNL")@item.BiddingItemID@string.Concat("Main")').fadeOut(7000, function () {
                                     $('#@string.Concat("PNL")@item.BiddingItemID@string.Concat("Main")').remove();
-                                    alertify.error("@item.ItemName@string.Concat(" is now expired!")");
+
+                                    AlertFadeOutTimerInSeconds = AlertFadeOutTimerInSeconds + 1;
+                                    alertify.error("@item.ItemName@string.Concat(" is now expired!")", AlertFadeOutTimerInSeconds);
                                 });
                             }
                         }
