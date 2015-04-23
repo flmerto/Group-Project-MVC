@@ -95,14 +95,23 @@ namespace MVC_Group_Project.Controllers
         {
             if (ModelState.IsValid)
             {
-                string imagePath = Server.MapPath("~/Images/" + file.FileName);
-                file.SaveAs(imagePath);
+                if (file == null)
+                {
+                    ViewData["Status"] = "NoImage";
+                    subCategory = db.SubCategories.Single(s => s.SubCategoryID == subCategory.SubCategoryID);
+                }
+                else
+                {
+                    string imagePath = Server.MapPath("~/Images/" + file.FileName);
+                    file.SaveAs(imagePath);
 
-                subCategory.ImagePath = "Images/" + file.FileName;
+                    subCategory.ImagePath = "Images/" + file.FileName;
 
-                db.Entry(subCategory).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                    db.Entry(subCategory).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                
             }
             ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName");
             return View(subCategory);
