@@ -79,22 +79,27 @@
                             </dl>
                         </div>
 
-                        @if (ViewData["Approved"] != null)
+                        @if (ViewData["IsApproved"] == "true")
                         {
                             <script>
                                 alertify.success("You have successfully bid to this item!");
                             </script>
-                            ViewData["Approved"] = null;
+                            ViewData["IsApproved"] = null;
                         }
-
-                        @if (ViewData["LowerBid"] != null)
+                        else if (ViewData["IsApproved"] == "LowBid")
                         {
                             <script>
                                 alertify.error("Please put an amount higher than the current/starting bid!");
                             </script>
-                            ViewData["LowerBid"] = null;
+                            ViewData["IsApproved"] = null;
                         }
-                        
+                        else if (ViewData["IsApproved"] == "NoCreditCard")
+                        {
+                            <script>
+                                alertify.log("You need to have a credit card in your account before you can bid.", "", 0);
+                            </script>
+                            ViewData["IsApproved"] = null;
+                        }
                     </form>
                 </div>
             </div>

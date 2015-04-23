@@ -144,7 +144,7 @@ namespace MVC_Group_Project.Controllers
                 if (file == null)
                 {
                     ViewData["Success"] = "false";
-                    ViewBag.SubCategoryID = new SelectList(db.SubCategories, "SubCategoryID", "SubCategoryName");
+                    //ViewBag.SubCategoryID = new SelectList(db.SubCategories, "SubCategoryID", "SubCategoryName");
                 }
                 else
                 {

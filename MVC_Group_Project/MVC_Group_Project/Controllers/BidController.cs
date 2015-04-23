@@ -19,7 +19,6 @@ namespace MVC_Group_Project.Controllers
         // GET: BiddingPage
         public ActionResult BidNow(int? id)
         {
-
             var model = new ModelsForBiddingPage();
 
             if (id == null || id == 0)
@@ -43,11 +42,16 @@ namespace MVC_Group_Project.Controllers
             if (bid != null)
             {
                 var userID = User.Identity.GetUserId();
-
-                try
+                var ifUserHasCreditCard = db.CreditCards.Where(c => c.UserId == userID).ToList();
+                if (ifUserHasCreditCard.Count == 0)
                 {
-                    var noBid = db.OnGoingBids.Where(o => o.BiddingItemID == id);
-                    if (db.OnGoingBids.Count() == 0 || noBid.Count() == 0)
+                    ViewData["IsApproved"] = "NoCreditCard";
+                    bid.bItem = db.BiddingItems.Single(item => item.BiddingItemID == id);
+                }
+                else
+                {
+                    var noBidOnItem = db.OnGoingBids.Where(o => o.BiddingItemID == id);
+                    if (db.OnGoingBids.Count() == 0 || noBidOnItem.Count() == 0)
                     {
                         if (bid.onGB.BidPrice > db.BiddingItems.Single(a => a.BiddingItemID == id).BidStartPrice)
                         {
@@ -61,11 +65,11 @@ namespace MVC_Group_Project.Controllers
                             db.OnGoingBids.Add(bid.onGB);
                             db.SaveChanges();
 
-                            ViewData["Approved"] = "true";
+                            ViewData["IsApproved"] = "true";
                         }
                         else
                         {
-                            ViewData["LowerBid"] = "true";
+                            ViewData["IsApproved"] = "LowBid";
                         }
                         //var highestBid = db.OnGoingBids.Where(x => x.BiddingItemID == id).OrderByDescending(y => y.BidPrice);
                         //ViewBag.HighestBid = highestBid.ToList();
@@ -85,11 +89,11 @@ namespace MVC_Group_Project.Controllers
                             db.OnGoingBids.Add(bid.onGB);
                             db.SaveChanges();
 
-                            ViewData["Approved"] = "true";
+                            ViewData["IsApproved"] = "true";
                         }
                         else
                         {
-                            ViewData["LowerBid"] = "true";
+                            ViewData["IsApproved"] = "LowBid";
                             //bid.bItem.HighestBidPrice = oldBidPrice.FirstOrDefault().BidPrice;
                         }
                     }
@@ -99,18 +103,9 @@ namespace MVC_Group_Project.Controllers
 
                     bid.bItem = db.BiddingItems.Single(item => item.BiddingItemID == id);
                 }
-                catch (DbEntityValidationException dbEx)
-                {
-                    foreach (var validationErrors in dbEx.EntityValidationErrors)
-                    {
-                        foreach (var validationError in validationErrors.ValidationErrors)
-                        {
-                            Trace.TraceInformation("Property: {0} Error: {1}", validationError.PropertyName, validationError.ErrorMessage);
-                        }
-                    }
-                    throw;
-                }
+
             }
+
             else
             {
                 Redirect("../Home/Index");
@@ -120,3 +115,19 @@ namespace MVC_Group_Project.Controllers
     }
 }
 
+
+//try
+//{
+                
+//}
+//catch (DbEntityValidationException dbEx)
+//{
+//    foreach (var validationErrors in dbEx.EntityValidationErrors)
+//    {
+//        foreach (var validationError in validationErrors.ValidationErrors)
+//        {
+//            Trace.TraceInformation("Property: {0} Error: {1}", validationError.PropertyName, validationError.ErrorMessage);
+//        }
+//    }
+//    throw;
+//}
