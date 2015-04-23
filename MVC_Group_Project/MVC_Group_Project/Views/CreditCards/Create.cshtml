@@ -7,10 +7,9 @@
 <h2 style="padding-left:90px">Add a credit card</h2>
 
 <script src="~/Scripts/jquery-1.10.2.js"></script>
-<script src="~/Scripts/alertify.js-0.3.11/src/alertify.js"></script>
-<link href="~/Scripts/alertify.js-0.3.11/themes/alertify.bootstrap.css" rel="stylesheet" />
-<link href="~/Scripts/alertify.js-0.3.11/themes/alertify.default.css" rel="stylesheet" />
-<link href="~/Scripts/alertify.js-0.3.11/themes/alertify.core.css" rel="stylesheet" />
+<script src="~/Scripts/alertifyjs/alertify.js"></script>
+<link href="~/Scripts/alertifyjs/css/alertify.css" rel="stylesheet" />
+<link href="~/Scripts/alertifyjs/css/themes/default.css" rel="stylesheet" />
 
 @using (Html.BeginForm()) 
 {
@@ -54,7 +53,7 @@
         @if (ViewData["hasCreditCard"] == "true") 
         {
          <script>
-             alertify.log("You already have a credit card in your account.", "",  0);
+             alertify.warning("You already have a credit card in your account.", 0);
          </script>   
         }
 
@@ -72,5 +71,5 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-    @Scripts.Render("~/Scripts/alertify.js-0.3.11/src/alertify.js")
+    @Scripts.Render("~/Scripts/alertifyjs/alertify.js")
 }
