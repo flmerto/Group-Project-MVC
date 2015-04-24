@@ -90,10 +90,9 @@ namespace MVC_Group_Project.Controllers
                                 db.Transactions.Add(tr);
                                 db.SaveChanges();
 
-                                if (expiredBiddingItems.Count == a)
-                                {
-                                    ViewData["UpdateStatus"] = "Items Sold/Expired";
-                                }
+                                
+                                ViewData["UpdateStatus"] = "Items Sold/Expired";
+                            
                             }
                         }
                     }
