@@ -110,7 +110,7 @@
             <table class="table table-striped table-hover ">
                 <tr>
                     <th>
-                        @Html.DisplayName("Bidder Email")
+                        @Html.DisplayName("CreditCard ID")
                     </th>
                     <th>
                         @Html.DisplayName("Item Name")
@@ -123,17 +123,17 @@
                     </th>
 
                 </tr>
-                @foreach (var item in Model.LiveBids.ToList())
+                @foreach (var item in Model.Purchases.ToList())
                 {
                     <tr>
                         <td>
-                            @Html.DisplayFor(i => item.User.Email)
+                            @Html.DisplayFor(i => item.CreditCardID)
                         </td>
                         <td>
                             @Html.DisplayFor(i => i.BidItems.Single(iT => iT.BiddingItemID == item.BiddingItemID).ItemName)
                         </td>
                         <td>
-                            @Html.DisplayFor(i => item.BidTime)
+                            @Html.DisplayFor(i => item.PurchaseDateTime)
                         </td>
                         <td>
                             @Html.DisplayFor(i => i.BidItems.OrderByDescending(a => a.HighestBidPrice).Where(b => b.BiddingItemID == item.BiddingItemID).FirstOrDefault().HighestBidPrice)
