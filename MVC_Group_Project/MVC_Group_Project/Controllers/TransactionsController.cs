@@ -19,7 +19,7 @@ namespace MVC_Group_Project.Controllers
         // GET: Transactions
         public ActionResult Index()
         {
-            var expiredBiddingItems = db.BiddingItems.Where(b => b.BidEndTime >= DateTime.Now).ToList();
+            var expiredBiddingItems = db.BiddingItems.Where(b => b.BidEndTime <= DateTime.Now).ToList();
 
             if (expiredBiddingItems.Count() == 0)
             {
@@ -42,7 +42,7 @@ namespace MVC_Group_Project.Controllers
 	                {
                         if (itemThatIsAlreadySold.Count == 0)
                         {
-                            break; // will get out of the loop if the item has not been yet sold
+                            break; // will get out of the for loop if the item is not sold
                         }
                         else
                         {
@@ -65,6 +65,7 @@ namespace MVC_Group_Project.Controllers
                         var expiredBI = expiredBiddingItems[a];
                         if (expiredBI.HighestBidPrice == 0)
                         {
+                            // just a double check if the item has any bids on it because expiredBiddingItems is not arranged so spot 0 might have a bid but spot 3 might not
                             // left blank so the item with no bids cant get past through transaction
                         }
                         else

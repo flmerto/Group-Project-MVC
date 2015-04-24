@@ -20,7 +20,7 @@
     @Scripts.Render("~/Scripts/alertifyjs/alertify.js")
 
     <script type="text/javascript">
-        var AlertFadeOutTimerInSeconds = 2;
+        var AlertFadeOutTimerInSeconds = 3;
 
         function AddHoverEffectOnItemByID(element) {
             $('.' + element).contenthover({
@@ -97,8 +97,8 @@
 
 <hr /> 
 
-<div style="align-self:center">
-    @foreach (var item in Model.Take(15).OrderByDescending(d => d.BidStartTime))
+<div style="position:relative">
+    @foreach (var item in Model.Where(e => e.BidStartTime != DateTime.Now))
     {
         <div class="col-sm-3" id="@string.Concat("PNL")@item.BiddingItemID@string.Concat("Main")">
             <div class="panel panel-primary" style="text-align:center">
@@ -121,7 +121,7 @@
                         <div class="btn btn-warning">@Html.ActionLink("Bid Now!", "BidNow", "Bid", new { id = item.BiddingItemID }, null)</div>
                     </div>
                 </div>
-                <div id="@string.Concat("cntdwn")@item.BiddingItemID" class="panel-footer" style="padding-bottom: 35px; position:relative"></div>
+                <div id="@string.Concat("cntdwn")@item.BiddingItemID" class="panel-footer" style="padding-bottom: 35px;"></div>
                 <script>
 
                     $(document).ready(function () {
