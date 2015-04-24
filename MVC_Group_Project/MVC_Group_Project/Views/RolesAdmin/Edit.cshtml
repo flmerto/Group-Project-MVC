@@ -14,20 +14,24 @@
     <div class="form-horizontal">
         
         <hr />
-        @Html.ValidationSummary(true)
-        @Html.HiddenFor(model => model.Id)
+        <div class="panel panel-warning" style="width:300px; text-align:center">
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(model => model.Id)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Name)
+            <div class="panel-heading">
+                <h3 class="panel-title">RoleName</h3>
+                @*@Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })*@
             </div>
-        </div>
+                <div class="panel-body">
+                    @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Name)
+                </div>
+          
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-primary" />
+            <div class="form-group">
+                <div>
+                    <input type="submit" value="Save" class="btn btn-warning" />
+                </div>
             </div>
         </div>
     </div>
