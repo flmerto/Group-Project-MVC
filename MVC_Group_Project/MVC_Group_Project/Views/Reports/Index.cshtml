@@ -4,7 +4,10 @@
 }
 
 <h2>Reports</h2>
+
 <hr />
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
 <ul class="nav nav-tabs">
     <li class="active"><a href="#BiddingItems" data-toggle="tab">Bidding Items</a></li>
     <li><a href="#OnGoingBids" data-toggle="tab">On Going Bids</a></li>
@@ -25,13 +28,13 @@
                             @Html.DisplayName("Item Name")
                         </th>
                         <th>
-                            @Html.DisplayName(" Bid Date")
+                            @Html.DisplayName("Bid Date")
                         </th>
                         
                     </tr>
                     @foreach (var item in Model.BidItems.ToList())
                     {
-                        <tr>    
+                        <tr id="@item.BiddingItemID">
                             <td>
                                 @Html.DisplayFor(i => item.BiddingItemID)
                             </td>                      
@@ -40,10 +43,21 @@
                             </td>
                             <td>
                                 @Html.DisplayFor(i => item.StartAndEnd)
+
+
+                                <script>
+                                    $(document).ready(function () {
+                                        var itemEndDate = new Date(@item.BidEndTime.ToString("yyyy, MM-1, dd"));
+                                        if (itemEndDate == new Date()) {
+                                            $("#@item.BiddingItemID").addClass("danger");
+                                        }
+                                    });
+                                </script>
                             </td>
                            
-                        </tr>                      
+                        </tr>
                     }
+ 
                     </table>
             </div>
         </div>
@@ -102,10 +116,10 @@
                         @Html.DisplayName("Item Name")
                     </th>
                     <th>
-                        @Html.DisplayName(" Bid Date")
+                        @Html.DisplayName("Sold Date")
                     </th>
                     <th>
-                        @Html.DisplayName("Highest Bid")
+                        @Html.DisplayName("Amount")
                     </th>
 
                 </tr>

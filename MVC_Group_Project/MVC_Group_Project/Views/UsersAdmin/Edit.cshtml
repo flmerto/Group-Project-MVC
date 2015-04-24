@@ -9,53 +9,58 @@
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-       
+    <div class="form-horizontal">    
         <hr />
-        @Html.ValidationSummary(true)
-        @Html.HiddenFor(model => model.Id)
-       
-        <div class="form-group">
-            @Html.LabelFor(model => model.Email, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-               @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-               @Html.ValidationMessageFor(model => model.Email)
-            </div>      
-        </div>
-        <div class="form-group">
-        @Html.LabelFor(model => model.FirstName, "First Name", new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.LastName, "Last Name", new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.Address, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Address, new { @class = "form-control" })
-        </div>
-    </div>
-        <div class="form-group">
-            @Html.Label("Roles", new { @class = "control-label col-md-2" })
-            <span class=" col-md-10">
-                    @foreach (var item in Model.RolesList)
-                    {
-                        <input type="radio" name="SelectedRole" value="@item.Value" checked="@item.Selected" class="checkbox-inline" />
-                        @Html.Label(item.Value, new { @class = "control-label" })
-                    }
-                <br /><br />
-                @Html.ActionLink("Change Password", "ResetPassword", new { id = Model.Id })
-            </span>
-        </div>
+        <div class="panel panel-warning" style="width:500px; text-align:center">
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(model => model.Id)
+            <div class="panel-heading">
+                <div class="panel-title"> Users</div>
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Email, new { @class = "control-label col-md-3" })
+                    <div class="col-md-offset-4" style="align-content:center">
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Email)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.FirstName, "First Name", new { @class = "col-md-3 control-label" })
+                    <div class="col-md-offset-4" style="align-content:center">
+                        @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.LastName, "Last Name", new { @class = "col-md-3 control-label" })
+                    <div class="col-md-offset-4" style="align-content:center">
+                        @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Address, new { @class = "col-md-3 control-label" })
+                    <div class="col-md-offset-4" style="align-content:center">
+                        @Html.TextBoxFor(m => m.Address, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.Label("Roles", new { @class = "control-label col-md-3" })
+                    <span class="col-md-6">
+                        @foreach (var item in Model.RolesList)
+                        {
+                            <input type="radio" name="SelectedRole" value="@item.Value" checked="@item.Selected" class="checkbox-inline" />
+                            @Html.Label(item.Value, new { @class = "control-label" })
+                        }
+                        <br /><br />
+                        @Html.ActionLink("Change Password", "ResetPassword", new { id = Model.Id })
+                    </span>
+                </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <div class="form-group">
+                    <div>
+                        <input type="submit" value="Save" class="btn btn-warning" />
+                    </div>
+                </div>
             </div>
         </div>
     </div>

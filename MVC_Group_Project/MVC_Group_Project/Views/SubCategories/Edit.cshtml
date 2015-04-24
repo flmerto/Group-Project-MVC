@@ -26,41 +26,39 @@
             @Html.HiddenFor(model => model.SubCategoryID)
 
             <div>
-                @Html.LabelFor(model => model.SubCategoryName, "SubCategory:", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-offset-2 col-md-10">
+                @Html.LabelFor(model => model.SubCategoryName, "SubCategory:", htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class ="col-md-offset-4" style="align-content:center">
                     @Html.EditorFor(model => model.SubCategoryName, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.SubCategoryName, "", new { @class = "text-danger" })
                 </div>
             </div>
-
+            <br />
             <div style="text-align:left">
-                @Html.LabelFor(model => model.ImagePath, "CurrentImage:", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-offset-2 col-md-10">
+                @Html.LabelFor(model => model.ImagePath, "CurrentImage:", htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-offset-4" style="align-content:center">
                     @*@Html.EditorFor(model => model.ImagePath, new { htmlAttributes = new { @class = "form-control" } })*@
                     <img src="../../@Html.DisplayFor(model => model.ImagePath)" style="height:150px; width:150px" />
                     @Html.ValidationMessageFor(model => model.ImagePath, "", new { @class = "text-danger" })
                 </div>
             </div>
-
-
-
+            <br />
             <div >
-                @Html.LabelFor(model => model.ImagePath, "NewImage:", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-offset-2 col-md-10">
+                @Html.LabelFor(model => model.ImagePath, "NewImage:", htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-offset-4" style="align-content:center">
                     @*@Html.EditorFor(model => model.ImagePath, new { htmlAttributes = new { @class = "form-control" } })*@
                     <input type="file" id="file" name="file" />
                     @Html.ValidationMessageFor(model => model.ImagePath, "", new { @class = "text-danger" })
                 </div>
             </div>
-
+            <br />
             <div >
-                @Html.LabelFor(model => model.CategoryID, "Category:", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-offset-2 col-md-10">
+                @Html.LabelFor(model => model.CategoryID, "Category:", htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-offset-4" style="align-content:center">
                     @Html.DropDownList("CategoryID", null, htmlAttributes: new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.CategoryID, "", new { @class = "text-danger" })
                 </div>
             </div>
-           
+           <br />
                 <div>
                     <div class="col-md-12" style="text-align:center">
                         <input type="submit" value="Save" class="btn btn-primary" />

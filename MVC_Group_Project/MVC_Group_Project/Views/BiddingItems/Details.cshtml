@@ -7,73 +7,79 @@
 <h2>Details</h2>
 
 <div class="form-horizontal">
-    <h4>BiddingItem</h4>
+    
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayName("SubCategory")
-        </dt>
+    <div class="panel panel-primary" style="width:500px; text-align:center">
+      
+        <div class="panel-heading">
+            <h3 class="panel-title">Item</h3>
+        </div>
+        <div class="panel-body">
+            <div>
+                @Html.DisplayName("SubCategory")
+                <div>
+                    @Html.DisplayFor(model => model.Sub.SubCategoryName)
+                </div>
+            </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Sub.SubCategoryName)
-        </dd>
-        <dt>
-            @Html.DisplayName("Item")
-        </dt>
+            
+            <div>
+                @Html.DisplayName("Item")
+            </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.ItemName)
-        </dd>
+            <div>
+                @Html.DisplayFor(model => model.ItemName)
+            </div>
 
-        <dt>
-            @Html.DisplayName("Description")
-        </dt>
+            <div>
+                @Html.DisplayName("Description")
+            </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.ItemDescription)
-        </dd>
+            <div>
+                @Html.DisplayFor(model => model.ItemDescription)
+            </div>
 
-        <dt>
-            @Html.DisplayName("Image")
-        </dt>
+            <div>
+                @Html.DisplayName("Image")
+            </div>
 
-        <dd>
-            <img src="../../@Html.DisplayFor(model => model.ItemImageURL)" style="height:150px; width:150px" />
-        </dd>
+            <div>
+                <img src="../../@Html.DisplayFor(model => model.ItemImageURL)" style="height:150px; width:150px" />
+            </div>
 
-        <dt>
-            @Html.DisplayName("Start Time")
-        </dt>
+            <div>
+                @Html.DisplayName("Start Time")
+            </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.BidStartTime)
-        </dd>
+            <div>
+                @Html.DisplayFor(model => model.BidStartTime)
+            </div>
 
-        <dt>
-            @Html.DisplayName("End Time")
-        </dt>
+            <div>
+                @Html.DisplayName("End Time")
+            </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.BidEndTime)
-        </dd>
+            <div>
+                @Html.DisplayFor(model => model.BidEndTime)
+            </div>
 
-        <dt>
-            @Html.DisplayName("Start Price")
-        </dt>
+            <div>
+                @Html.DisplayName("Start Price")
+            </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.BidStartPrice)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.BidStartPrice)
+            </dd>
 
-        @*<dt>
+            @*<dt>
                 @Html.DisplayName("Highest Price")
             </dt>
 
             <dd>
                 @Html.DisplayFor(model => model.HighestBidPrice)
             </dd>*@
-
-    </dl>
+        </div>
+    </div>
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.BiddingItemID }) |

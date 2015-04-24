@@ -15,91 +15,95 @@
 {
     @Html.AntiForgeryToken()
     
-    <div class="form-horizontal">
-        <h4>BiddingItem</h4>
+    <div class="form-horizontal">        
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.BiddingItemID)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.ItemName, "Item", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ItemName, new { htmlAttributes = new { @class = "form-control", maxlength = "25" } })
-                @Html.ValidationMessageFor(model => model.ItemName, "", new { @class = "text-danger" })
-                
+        <div class="panel panel-warning" style="width:500px; text-align:center">
+            <div class="panel-heading">
+                <h3 class="panel-title">Item</h3>
+            </div>
+            <br />
+            <div class="form-group">
+                @Html.LabelFor(model => model.ItemName, "Item", htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-offset-4" style="align-content:center">
+                    @Html.EditorFor(model => model.ItemName, new { htmlAttributes = new { @class = "form-control", maxlength = "25" } })
+                    @Html.ValidationMessageFor(model => model.ItemName, "", new { @class = "text-danger" })
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ItemDescription, "Description", htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-offset-4" style="align-content:center">
+                    @Html.EditorFor(model => model.ItemDescription, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ItemDescription, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ItemImageURL, "Image", htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-offset-4" style="align-content:center">
+                    <input type="file" id="file" name="file" />
+                    @Html.ValidationMessageFor(model => model.ItemImageURL, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.SubCategoryID, "Category", htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-offset-4" style="align-content:center">
+                    @Html.DropDownList("SubCategoryID", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.SubCategoryID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.BidStartTime, "Start Time", htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-offset-4" style="align-content:center">
+                    @Html.EditorFor(model => model.BidStartTime, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.BidStartTime, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.BidEndTime, "EndTime", htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-offset-4" style="align-content:center">
+                    @Html.EditorFor(model => model.BidEndTime, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.BidEndTime, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.BidStartPrice, "Start Price", htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-offset-4" style="align-content:center">
+                    @Html.EditorFor(model => model.BidStartPrice, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.BidStartPrice, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.HighestBidPrice, "Highest Bid", htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-offset-4" style="align-content:center">
+                    @Html.EditorFor(model => model.HighestBidPrice, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.HighestBidPrice, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            @*<div class="form-group">
+                @Html.LabelFor(model => model.UserId, "UserId", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("UserId", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.UserId, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+            <div class="form-group">
+                <div>
+                    <input type="submit" value="Save" class="btn btn-warning" />
+                </div>
             </div>
         </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ItemDescription, "Description", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ItemDescription, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ItemDescription, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ItemImageURL, "Image", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <input type="file" id="file" name="file" />
-                @Html.ValidationMessageFor(model => model.ItemImageURL, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.SubCategoryID, "Category", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("SubCategoryID", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.SubCategoryID, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.BidStartTime, "Start Time", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.BidStartTime, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.BidStartTime, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.BidEndTime, "EndTime", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.BidEndTime, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.BidEndTime, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.BidStartPrice, "Start Price", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.BidStartPrice, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.BidStartPrice, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.HighestBidPrice, "Highest Bid", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.HighestBidPrice, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.HighestBidPrice, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        @*<div class="form-group">
-            @Html.LabelFor(model => model.UserId, "UserId", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("UserId", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.UserId, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </div>
-
         @if (ViewData["Success"] == "false")
         {
             <script>
