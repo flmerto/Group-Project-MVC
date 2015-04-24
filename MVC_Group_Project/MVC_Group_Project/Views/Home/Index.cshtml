@@ -4,7 +4,7 @@
     ViewBag.Title = "Home Page";
 }
 
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
 <link href="~/Scripts/jquery.countdown.package-2.0.2/jquery.countdown.css" rel="stylesheet" />
 <script src="~/Scripts/jquery.countdown.package-2.0.2/jquery.countdown.js"></script>
 <script src="~/Scripts/jquery.countdown.package-2.0.2/jquery.plugin.js"></script>
@@ -21,6 +21,7 @@
 
     <script type="text/javascript">
         var AlertFadeOutTimerInSeconds = 3;
+        var todaysDate = Date.now;
 
         function AddHoverEffectOnItemByID(element) {
             $('.' + element).contenthover({
@@ -42,7 +43,7 @@
 }
 <hr />
 <div class="jumbotron">
-        <div class="container">
+    <div class="container">
         <div id="myCarousel" class="carousel slide">
             <ol class="carousel-indicators">
                 <li data-target="#myCarousel" data-slide-to="0" class="active" style="background-color:powderblue"></li>
@@ -54,7 +55,7 @@
                     <div class="item active">
                         <img src="~/Images/bidimage2.jpg" />
                         <div class="container">
-                            <div class="carousel-caption">                               
+                            <div class="carousel-caption">
                                 <a>@Html.ActionLink("Add Bid Item Here!", "Create", "BiddingItems")</a>
                             </div>
 
@@ -64,7 +65,7 @@
                     <div class="item">
                         <img src="~/Images/bidimage3.jpg" />
                         <div class="container">
-                            <div class="carousel-caption">                               
+                            <div class="carousel-caption">
                                 <a>@Html.ActionLink("Add Bid Item Here!", "Create", "BiddingItems")</a>
                             </div>
 
@@ -74,7 +75,7 @@
                     <div class="item">
                         <img src="~/Images/bidimage4.jpg" />
                         <div class="container">
-                            <div class="carousel-caption">                              
+                            <div class="carousel-caption">
                                 <a>@Html.ActionLink("Add Bid Item Here!", "Create", "BiddingItems")</a>
                             </div>
 
@@ -95,10 +96,10 @@
 </div>
 <h4 class="text-info">Live Bidding</h4>
 
-<hr /> 
+<hr />
 
 <div style="position:relative">
-    @foreach (var item in Model.Where(e => e.BidStartTime != DateTime.Now))
+    @foreach (var item in Model.Where(e => e.BidStartTime <= DateTime.Now))
     {
         <div class="col-sm-3" id="@string.Concat("PNL")@item.BiddingItemID@string.Concat("Main")">
             <div class="panel panel-primary" style="text-align:center">
@@ -108,7 +109,7 @@
                 <div class="panel-body" style="padding-left:27px">
                     <img class="MyAwesomeHoverAbilities" id="@string.Concat("IMG")@item.SubCategoryID@item.BiddingItemID@string.Concat("Main")" style="height:150px; width:200px;" src="~/@item.ItemImageURL" class="img-responsive" alt="Responsive image" />
                     <img class="MyAwesomeHoverAbilities" id="@string.Concat("IMG")@item.BiddingItemID@string.Concat("Sub")" style="position: absolute; top: 0; left: 0;height:150px; width:200px;" />
-                    
+
                     <div class="contenthover">
                         <dl>
                             <dt>
@@ -125,6 +126,7 @@
                 <script>
 
                     $(document).ready(function () {
+
                         var startBid = new Date();
                         var endBid = new Date(@item.BidEndTime.ToString("yyyy,MM-1,dd"));
                         var timeLeft = Math.abs(endBid - startBid) / 1000;
@@ -169,6 +171,53 @@
                         else {
                             $("#@string.Concat("IMG")@item.BiddingItemID@string.Concat("Sub")").remove(); // will not show expired/sold image if endbid is not today
                         }
+
+                        setInterval(function () {
+                            var startBid = new Date();
+                            var endBid = new Date(@item.BidEndTime.ToString("yyyy,MM-1,dd"));
+                            var timeLeft = Math.abs(endBid - startBid) / 1000;
+                            $('#@string.Concat("cntdwn")@item.BiddingItemID').countdown({ until: timeLeft, format: 'HMS' });
+
+                            if (endBid <= new Date()) {
+                                var ifItemHasBids = parseInt(@item.HighestBidPrice);
+                                if (ifItemHasBids != 0.00 || ifItemHasBids != 0) {
+                                    $("#@string.Concat("IMG")@item.BiddingItemID@string.Concat("Sub")").attr("src", "../Images/sold-sign.png").show(); // will show the expired image on top of the item img
+                                    $('#@string.Concat("IMG")@item.SubCategoryID@item.BiddingItemID@string.Concat("Main")').css({ position: "absolute", left: "43px" }); // will add css for the image not to go out of the panel
+                                    $("#@string.Concat("IMG")@item.BiddingItemID@string.Concat("Sub")").removeClass("MyAwesomeHoverAbilities"); // Item Picture, removed the hover effect on expired items, so the users cant bid on it anymore
+                                    $('#@string.Concat("IMG")@item.SubCategoryID@item.BiddingItemID@string.Concat("Main")').removeClass("MyAwesomeHoverAbilities"); // Expired Picture, removed the hover effect on expired items, so the users cant bid on it anymore
+                                    $('#@string.Concat("IMG")@item.BiddingItemID@string.Concat("Sub")').css({ position: "absolute", left: "43px", top: "54px" }); // will add css for the image not to go out of the panel
+
+                                    $('#@string.Concat("cntdwn")@item.BiddingItemID').countdown('destroy'); // removed the timer on sold items
+
+                                    // If the item is expired it will fadeout then removed
+                                    $('#@string.Concat("PNL")@item.BiddingItemID@string.Concat("Main")').fadeOut(7000, function () {
+                                        $('#@string.Concat("PNL")@item.BiddingItemID@string.Concat("Main")').remove();
+                                        AlertFadeOutTimerInSeconds = AlertFadeOutTimerInSeconds + 1;
+                                        alertify.success("@item.ItemName@string.Concat(" has been sold!")", AlertFadeOutTimerInSeconds);
+                                    });
+                                }
+                                else {
+                                    $("#@string.Concat("IMG")@item.BiddingItemID@string.Concat("Sub")").attr("src", "../Images/sash-expired.png").show(); // will show the expired image on top of the item img
+                                    $('#@string.Concat("IMG")@item.SubCategoryID@item.BiddingItemID@string.Concat("Main")').css({ position: "absolute", left: "43px" }); // will add css for the image not to go out of the panel
+                                    $("#@string.Concat("IMG")@item.BiddingItemID@string.Concat("Sub")").removeClass("MyAwesomeHoverAbilities"); // Item Picture, removed the hover effect on expired items, so the users cant bid on it anymore
+                                    $('#@string.Concat("IMG")@item.SubCategoryID@item.BiddingItemID@string.Concat("Main")').removeClass("MyAwesomeHoverAbilities"); // Expired Picture, removed the hover effect on expired items, so the users cant bid on it anymore
+                                    $('#@string.Concat("IMG")@item.BiddingItemID@string.Concat("Sub")').css({ position: "absolute", left: "43px", top: "54px" }); // will add css for the image not to go out of the panel
+
+                                    $('#@string.Concat("cntdwn")@item.BiddingItemID').countdown('destroy'); // removed the timer on expired items
+
+                                    // If the item is expired it will fadeout then removed
+                                    $('#@string.Concat("PNL")@item.BiddingItemID@string.Concat("Main")').fadeOut(7000, function () {
+                                        $('#@string.Concat("PNL")@item.BiddingItemID@string.Concat("Main")').remove();
+
+                                        AlertFadeOutTimerInSeconds = AlertFadeOutTimerInSeconds + 1;
+                                        alertify.error("@item.ItemName@string.Concat(" is now expired!")", AlertFadeOutTimerInSeconds);
+                                    });
+                                }
+                            }
+                            else {
+                                $("#@string.Concat("IMG")@item.BiddingItemID@string.Concat("Sub")").remove(); // will not show expired/sold image if endbid is not today
+                            }
+                        }, new Date() - new Date(@item.BidEndTime.ToString("yyyy, MM-1, dd"))); //1000*60*60*24 this is 24hrs
                     });
                 </script>
             </div>
