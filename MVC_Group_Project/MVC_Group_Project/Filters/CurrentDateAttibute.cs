@@ -11,7 +11,7 @@ namespace MVC_Group_Project.Filters
         {
             public override bool IsValid(object date)
             {
-                if (Convert.ToDateTime(date) >= DateTime.Now || Convert.ToDateTime(date) == DateTime.Now)
+                if (Convert.ToDateTime(date) >= DateTime.Today || Convert.ToDateTime(date) == DateTime.Today)
                 {
                     DateTime startdateTime = Convert.ToDateTime(date);
                     return startdateTime >= DateTime.Now.AddDays(-1);    
