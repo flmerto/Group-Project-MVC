@@ -10,47 +10,47 @@
 @using (Html.BeginForm("Edit", "Categories", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-    
-    <div class="panel panel-primary" style="width:500px" >
-        <div class=" panel-heading">
-        <h4>Category</h4>
-    </div>
-
+    <div class="form-horizontal">       
         <div class="panel-body">
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.CategoryID)
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.CategoryID)
 
-            <div>
-                @Html.LabelFor(model => model.CategoryName, "Category:", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10" style="padding-bottom:20px">
-                    @Html.EditorFor(model => model.CategoryName, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.CategoryName, "", new { @class = "text-danger" })
+            <div class="panel panel-warning" style="width:500px; text-align:center">
+                <div class=" panel-heading">
+                    <h3 class="panel-title">Category</h3>
                 </div>
-            </div>
-            <div style="text-align:left">
-                @Html.LabelFor(model => model.ImagePath, "CurrentImage:", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10" style="padding-bottom:20px">
-                    @*@Html.EditorFor(model => model.ImagePath, new { htmlAttributes = new { @class = "form-control" } })*@
-                    <img src="../../@Html.DisplayFor(model => model.ImagePath)" style="height:150px; width:150px" />
-                    @Html.ValidationMessageFor(model => model.ImagePath, "", new { @class = "text-danger" })
+                <br />
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CategoryName, "Category:", htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-offset-4" style="align-content:center">
+                        @Html.EditorFor(model => model.CategoryName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.CategoryName, "", new { @class = "text-danger" })
+                    </div>
                 </div>
-            </div>
-        <div>
-                @Html.LabelFor(model => model.ImagePath, "NewImage:", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @*@Html.EditorFor(model => model.ImagePath, new { htmlAttributes = new { @class = "form-control" } })*@
-                <input type="file" id="file" name="file" />
-                @Html.ValidationMessageFor(model => model.ImagePath, "", new { @class = "text-danger" })
+                <div class="form-group" style="text-align:left">
+                    @Html.LabelFor(model => model.ImagePath, "Current Image:", htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-offset-4" style="align-content:center">
+                        @*@Html.EditorFor(model => model.ImagePath, new { htmlAttributes = new { @class = "form-control" } })*@
+                        <img src="../../@Html.DisplayFor(model => model.ImagePath)" style="height:150px; width:150px" />
+                        @Html.ValidationMessageFor(model => model.ImagePath, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ImagePath, "NewImage:", htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-offset-4" style="align-content:center">
+                        @*@Html.EditorFor(model => model.ImagePath, new { htmlAttributes = new { @class = "form-control" } })*@
+                        <input type="file" id="file" name="file" />
+                        @Html.ValidationMessageFor(model => model.ImagePath, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-12" style="text-align:center">
+                        <input type="submit" value="Save" class="btn btn-warning" />
+                    </div>
+                </div>
             </div>
         </div>
-
-            <div >
-            <div class="col-md-12" style="text-align:center">
-                    <input type="submit" value="Save" class="btn btn-primary" />
-                </div>
-            </div>
-        </div>
-
     </div>
 }
 

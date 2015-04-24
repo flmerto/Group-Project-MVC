@@ -9,75 +9,76 @@
 <div class="form-horizontal">
     
     <hr />
-    <div class="panel panel-primary" style="width:500px; text-align:center">
+    <div class="panel panel-primary" style="width:400px; text-align:left">
       
         <div class="panel-heading">
-            <h3 class="panel-title">Item</h3>
+            <h3 class="panel-title" style="text-align:center">Item</h3>
         </div>
         <div class="panel-body">
-            <div>
-                @Html.DisplayName("SubCategory")
-                <div>
-                    @Html.DisplayFor(model => model.Sub.SubCategoryName)
-                </div>
+            <div class="col-md-5">
+                <dl>
+                    <dt>
+                        @Html.DisplayName("SubCategory")
+                    </dt>
+                   
+                    <dt>
+                        @Html.DisplayName("Item")
+                    </dt>
+
+                    <dt>
+                        @Html.DisplayName("Description")
+                    </dt>
+               
+                    <dt>
+                        @Html.DisplayName("Start Time")
+                    </dt>
+
+                    <dt>
+                        @Html.DisplayName("End Time")
+                    </dt>
+
+                    <dt>
+                        @Html.DisplayName("Start Price")
+                    </dt>
+
+                    <dt>
+                        @Html.DisplayName("Image")
+                    </dt>
+                    @*<dt>
+                    @Html.DisplayName("Highest Price")
+                    </dt>*@               
+                </dl>
+            </div>
+            <div class="col-md-6">
+                <dl>
+                    <dd>
+                        @Html.DisplayFor(model => model.Sub.SubCategoryName)
+                    </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.ItemName)
+                    </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.ItemDescription)
+                    </dd>
+                    
+                    <dd>
+                        @Html.DisplayFor(model => model.BidStartTime)
+                    </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.BidEndTime)
+                    </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.BidStartPrice)
+                    </dd>
+                    <dd>
+                        <img src="../../@Html.DisplayFor(model => model.ItemImageURL)" style="height:150px; width:150px" />
+                    </dd>
+                    @*<dd>
+                    @Html.DisplayFor(model => model.HighestBidPrice)
+                </dd>*@
+                </dl>
             </div>
 
-            
-            <div>
-                @Html.DisplayName("Item")
-            </div>
-
-            <div>
-                @Html.DisplayFor(model => model.ItemName)
-            </div>
-
-            <div>
-                @Html.DisplayName("Description")
-            </div>
-
-            <div>
-                @Html.DisplayFor(model => model.ItemDescription)
-            </div>
-
-            <div>
-                @Html.DisplayName("Image")
-            </div>
-
-            <div>
-                <img src="../../@Html.DisplayFor(model => model.ItemImageURL)" style="height:150px; width:150px" />
-            </div>
-
-            <div>
-                @Html.DisplayName("Start Time")
-            </div>
-
-            <div>
-                @Html.DisplayFor(model => model.BidStartTime)
-            </div>
-
-            <div>
-                @Html.DisplayName("End Time")
-            </div>
-
-            <div>
-                @Html.DisplayFor(model => model.BidEndTime)
-            </div>
-
-            <div>
-                @Html.DisplayName("Start Price")
-            </div>
-
-            <dd>
-                @Html.DisplayFor(model => model.BidStartPrice)
-            </dd>
-
-            @*<dt>
-                @Html.DisplayName("Highest Price")
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.HighestBidPrice)
-            </dd>*@
         </div>
     </div>
 </div>

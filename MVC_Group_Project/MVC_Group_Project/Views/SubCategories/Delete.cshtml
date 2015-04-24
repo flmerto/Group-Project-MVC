@@ -6,11 +6,8 @@
 
 <h2>Delete</h2>
 
-<hr />
-
 <h4 class="text-danger">Are you sure you want to delete this?</h4>
-
-
+<hr />
 
 <div class="panel panel-primary" style="width:300px; text-align:center">
 
@@ -52,7 +49,7 @@
         </dd>
 
     </dl>*@
-
+@*</div>*@
     @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
 
@@ -61,4 +58,4 @@
             @Html.ActionLink("Back to List", "Index")
         </div>
     }
-</div>
+
