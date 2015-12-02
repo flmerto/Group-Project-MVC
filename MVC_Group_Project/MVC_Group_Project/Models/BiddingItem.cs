@@ -18,6 +18,8 @@ namespace MVC_Group_Project.Models
 
         [DataType(DataType.MultilineText)]
         public string ItemDescription { get; set; }
+
+        [DataType(DataType.ImageUrl)]
         public string ItemImageURL { get; set; }
 
 
@@ -29,13 +31,11 @@ namespace MVC_Group_Project.Models
         [DataType(DataType.Date)]
         [CurrentDateAttibute]
         [Required(ErrorMessage="Date field mandatory!")]
-     
         public DateTime BidStartTime { get; set; }
         
         [DataType(DataType.Date)]
         [CurrentDateAttibute]
         [Required(ErrorMessage = "Date field mandatory!")]
-     
         public DateTime BidEndTime { get; set; }
 
         [DataType(DataType.Date)]
